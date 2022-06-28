@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="372" height="372" viewBox="0 0 372 372">
+  <defs>
+    <filter id="Oval_9" x="0" y="0" width="372" height="372" filterUnits="userSpaceOnUse">
+      <feOffset dy="10" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="50" result="blur"/>
+      <feFlood flood-color="#84d157" flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Locations" transform="translate(101.5 44.5)">
+    <g id="Main_dot" data-name="Main dot" transform="translate(49 96)">
+      <g transform="matrix(1, 0, 0, 1, -150.5, -140.5)" filter="url(#Oval_9)">
+        <circle id="Oval_9-2" data-name="Oval 9" cx="35.5" cy="35.5" r="35.5" transform="translate(150.5 140.5)" fill="rgba(255,211,167,0.43)" stroke="#ff8308" stroke-miterlimit="10" stroke-width="1"/>
+      </g>
+      <circle id="Oval_8" data-name="Oval 8" cx="8.5" cy="8.5" r="8.5" transform="translate(27 27)" fill="#ff8308" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="facebook_app_id">3124353617815810</string>
+    <string name="fb_login_protocol_scheme">fb3124353617815810</string>
+    <string name="app_name">Cars Store</string>
+    <string name="facebook_client_token">6ebb55debe971d5473c45974058e7d84</string>
+</resources>
+

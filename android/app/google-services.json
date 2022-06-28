@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "373875489493",
+    "project_id": "syara-finder",
+    "storage_bucket": "syara-finder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373875489493:android:a531cbab1f6f108e63805c",
+        "android_client_info": {
+          "package_name": "com.example.syara_finder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373875489493-f86t3vevgls21jo3g596ar94akh3723r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.syara_finder",
+            "certificate_hash": "fa3b0bc7f2d7745299ab4f92d190d41fcc5ddce1"
+          }
+        },
+        {
+          "client_id": "373875489493-cjt2fiuk44okgje2bd29v2rk2q46kpav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH3XTU2ybYvF-hnlL_twvoNGNVigNdK4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373875489493-cjt2fiuk44okgje2bd29v2rk2q46kpav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
