@@ -29,11 +29,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   double largeContainerWidth =0;
   double largeContainerHeight =0;
-  double iconContainerH=70.h;
-  double iconContainerW=70.w;
+  double iconContainerH=80;
+  double iconContainerW=80;
   double searchIconHeight =0;
   double fontSize=0;
-  double iconSize=70.w;
+  double iconSize=70.h;
   late Timer timer;
 
   @override
@@ -43,12 +43,15 @@ class _SplashScreenState extends State<SplashScreen> {
     largeContainerHeight=0;
     timer =Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        if(largeContainerWidth==80.w&&largeContainerHeight==80.h){
+        if(largeContainerWidth==100&&largeContainerHeight==100){
 
         }
         else{
-          largeContainerWidth=100.w;
-          largeContainerHeight=100.h;
+          if(largeContainerHeight==0&&largeContainerWidth==0){
+            largeContainerWidth=120.h;
+            largeContainerHeight=120.h;
+          }
+
         }
       });
     },);
@@ -76,11 +79,12 @@ class _SplashScreenState extends State<SplashScreen> {
               Container(
                 height: 450.h,
                 width: MediaQuery.of(context).size.width,
-                color: HexColor("#FF8308"),
+                color: HexColor("#ff8308"),
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
                     AnimatedContainer(
+
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(17.r),
                         color: Colors.white,
@@ -90,34 +94,38 @@ class _SplashScreenState extends State<SplashScreen> {
                       duration: Duration(milliseconds: 900),
                       onEnd: (){
                         setState(() {
-                          if(largeContainerHeight==80.h&&largeContainerWidth==80.w){}
+                          if(largeContainerHeight==80&&largeContainerWidth==80){
+
+                          }
                           else{
+
                             searchIconHeight =185.h;
                           }
                         });
                       },
                     ),
                     AnimatedPositioned(
-                        duration: Duration(milliseconds: 900),
-                        onEnd: (){
-                          setState(() {
-                            fontSize=50.sp;
-                            largeContainerHeight=80.h;
-                            largeContainerWidth=80.w;
-                            iconContainerH=50.h;
-                            iconContainerW=50.h;
-                            iconSize=40.h;
-                            searchIconHeight=200.h;
-                          });
-                        },
-                        top: searchIconHeight,
+
+                      duration: Duration(milliseconds: 900),
+                      onEnd: (){
+                        setState(() {
+                          fontSize=45.sp;
+                          largeContainerHeight=90.h;
+                          largeContainerWidth=90.h;
+                          iconContainerH=50.h;
+                          iconContainerW=50.h;
+                          iconSize=40.h;
+                          searchIconHeight=200.h;
+                        });
+                      },
+                      top: searchIconHeight,
                       child: AnimatedContainer(
                         height: iconContainerH,
                         width: iconContainerW,
                         duration: Duration(milliseconds: 900),
                         onEnd: () async {
                           if (FirebaseAuth.instance.currentUser != null) {
-                          // signed in
+                            // signed in
                             authProvider!.getLoggedInUser();
                             Navigator.of(context).pushReplacement(PageTransition(
                               type: PageTransitionType.bottomToTop,
@@ -132,6 +140,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
                         },
                         decoration: BoxDecoration(
+
                             image: DecorationImage(
                                 image: AssetImage("assets/icons/searchIcon.png"),
                                 fit: BoxFit.cover)
