@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
 import 'package:syara_finder/Shared/Componantes.dart';
 import '../../../../Home/presentation/pages/HomePage/explorePage.dart';
 
@@ -18,10 +19,12 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController password = TextEditingController();
 
   AuthProvider? authProviderInstance;
-
+  HomeProvider ?homeProvider;
   @override
   Widget build(BuildContext context) {
     authProviderInstance = Provider.of<AuthProvider>(context);
+    homeProvider = Provider.of<HomeProvider>(context);
+
     return Scaffold(
       backgroundColor: HexColor("#FFF0DF"),
       body: ListView(
@@ -120,13 +123,17 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: ElevatedButton(
                 onPressed: () async{
-
-                  await authProviderInstance!.signInWithNormalAccount(email: email.text, password: password.text).then((value) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => explorePage()),
-                    );
-                  });
+                  homeProvider!.returnNavBarToHome();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => explorePage()),
+                  );
+                  // await authProviderInstance!.signInWithNormalAccount(email: email.text, password: password.text).then((value) {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(builder: (context) => explorePage()),
+                  //   );
+                  // });
                 },
                 child: Text(
                   "Login",

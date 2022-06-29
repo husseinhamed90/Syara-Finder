@@ -23,7 +23,6 @@ class AuthRepositoryImpli extends AuthRepository{
   Future<UserCredential> signInWithNormalAccount({required String email , required String password}) {
     // TODO: implement signInWithNormalAccount
     return FirebaseService.signInWithNormalAccount(email: email, password: password);
-    throw UnimplementedError();
   }
 
   @override

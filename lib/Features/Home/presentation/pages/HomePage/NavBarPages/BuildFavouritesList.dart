@@ -70,7 +70,9 @@ class _buildFavouritesListState extends State<buildFavouritesList> {
                                         ),
                                       ),
                                       const Spacer(),
-                                      buildButton(textSize: 10,onTap: (){}, buttonText: 'Go to website',height: 38.h,width:98.w ),
+                                      buildButton(textSize: 10,onTap: (){
+                                        openLinkOfCurrentCar(appProviderInstance!.favourites[index].originUrl!);
+                                      }, buttonText: 'Go to website',height: 38.h,width:98.w ),
                                     ],
                                   ),
                                 ),

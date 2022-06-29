@@ -40,10 +40,16 @@ class explorePage extends StatelessWidget {
           selectedItemColor: Colors.amber[800],
           onTap: (value) {
             if(value==2){
+
+              print(authProvider!.profile);
+
               if(authProvider!.userCredential==null){
-                showDialogWhenProfilePageTapped(context);
+                if(showDialogWhenProfilePageTapped(context,authProvider!)){
+                  appProviderInstance!.onPageSelected(value,context);
+                }
               }
               else{
+
                 appProviderInstance!.onPageSelected(value,context);
               }
             }

@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:syara_finder/Features/Authentication/domain/repositories/AuthRepository.dart';
+import 'package:syara_finder/Features/Authentication/data/local/data_sources/SharedPrefSource.dart';
 import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
 import 'package:syara_finder/Features/BrandsAndModels/presentation/manager/BrandsAndModelsProvider.dart';
 import 'Features/Cars/presentation/manager/CarsProvider.dart';
@@ -16,6 +15,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await di.init();
+  await SharedPrefSource.init();
   runApp(
     MultiProvider(
       providers: [

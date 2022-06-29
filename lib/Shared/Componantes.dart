@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
 import 'package:syara_finder/Features/Authentication/presentation/pages/signning/sign.dart';
 import 'package:syara_finder/Features/BrandsAndModels/presentation/manager/BrandsAndModelsProvider.dart';
 import 'package:syara_finder/Features/BrandsAndModels/presentation/pages/BrandsPage/brandsPage.dart';
@@ -14,6 +15,8 @@ import '../Features/Home/presentation/manager/HomeProvider.dart';
 import '../Features/Home/presentation/pages/HomePage/explorePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 PopupMenuItem<Model> buildPopupMenuItem(Model text) {
   return PopupMenuItem(
@@ -27,12 +30,13 @@ PopupMenuItem<Model> buildPopupMenuItem(Model text) {
       ));
 }
 
-Container buildSkipButton(BuildContext context) {
+Container buildSkipButton(BuildContext context,HomeProvider homeProvider) {
   return Container(
     alignment: Alignment.centerLeft,
     padding: const EdgeInsets.only(left: 20),
     child: TextButton(
       onPressed: () {
+        homeProvider.returnNavBarToHome();
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => explorePage(),));
       },
       child: Text(
@@ -129,7 +133,9 @@ AppBar buildCustomAppBar() {
     title: const Text('Available Car'),
   );
 }
-
+Future openLinkOfCurrentCar(String url) async {
+  if (!await launchUrl(Uri.parse(url))) throw 'Could not launch $url';
+}
 IconButton buildIconButton({required String iconLink,required Function onPressed}) {
   return IconButton(onPressed: (){
     onPressed();
@@ -376,8 +382,8 @@ Expanded buildSection({String ?title,String ?subTitle="",dynamic nextPage,BuildC
   );
 }
 
-bool showDialogWhenProfilePageTapped(BuildContext context){
-  if (FirebaseAuth.instance.currentUser == null) {
+bool showDialogWhenProfilePageTapped(BuildContext context,AuthProvider authProvider){
+  if (authProvider.userCredential == null&&authProvider.additionalUserInfo==null&&authProvider.profile==null) {
     showDialogWithMessage(context: context,message: "You Should Be Logged In First To Show Your Profile");
     return false;
   }

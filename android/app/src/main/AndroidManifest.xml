@@ -2,8 +2,7 @@
         package="com.example.syara_finder">
 
 <queries>
-    <provider android:authorities="com.facebook.katana.provider.PlatformProvider"
-        android:exported="false" />
+    <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
 </queries>
 <uses-permission android:name="android.permission.INTERNET"/>
 <application

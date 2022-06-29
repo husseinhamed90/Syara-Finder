@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:syara_finder/Features/Authentication/data/remote/data_sources/FirebaseService.dart';
 import 'package:syara_finder/Features/Cars/presentation/manager/CarsProvider.dart';
 
 import '../../../../../../Shared/Componantes.dart';
@@ -104,11 +105,12 @@ class _buildExplorePageState extends State<buildExplorePage> {
                             buildButton(
                                 textSize: 16,
                                 onTap: () async {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              FilteredList()));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             FilteredList()));
+                                 // FirebaseService.signOutFromAccount();
                                 },
                                 buttonText: 'Search',
                                 height: 60.h,

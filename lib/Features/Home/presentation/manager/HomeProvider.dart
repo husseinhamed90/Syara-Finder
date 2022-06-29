@@ -19,6 +19,7 @@ class HomeProvider extends ChangeNotifier{
   }
   void returnNavBarToHome() {
     navBarSelectedIndex = 0;
+    notifyListeners();
   }
 
   //favourites

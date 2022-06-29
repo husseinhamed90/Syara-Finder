@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:syara_finder/Features/Authentication/data/local/data_sources/SharedPrefSource.dart';
 import 'Features/Authentication/data/repositories/AuthRepositoryImpl.dart';
 import 'Features/Authentication/domain/repositories/AuthRepository.dart';
 import 'Features/Authentication/presentation/manager/AuthProvider.dart';
@@ -22,7 +23,10 @@ Future<void> init() async {
   // Providers
   dependencyInjectionInstance.registerLazySingleton(() => HomeProvider());
   dependencyInjectionInstance.registerLazySingleton(() => BrandsAndModelsProvider(dependencyInjectionInstance()));
-  dependencyInjectionInstance.registerLazySingleton(() => AuthProvider(dependencyInjectionInstance(),dependencyInjectionInstance()));
+  dependencyInjectionInstance.registerLazySingleton(() => AuthProvider(dependencyInjectionInstance(),dependencyInjectionInstance(),dependencyInjectionInstance()));
   dependencyInjectionInstance.registerLazySingleton(() => CarsProvider(dependencyInjectionInstance(),));
+
+  dependencyInjectionInstance.registerLazySingleton(() => SharedPrefSource());
+
 
 }

@@ -46,15 +46,16 @@ class profile extends StatelessWidget {
                   child: Column(
                     children:  <Widget>[
                       const SizedBox(height: 10.0),
-                      const ListTile(
+                       ListTile(
                         // ignore: prefer_const_constructors
-                        title: Text("Full Name"),
-                      //  subtitle: Text(authProviderInstance!.userCredential!.user!.displayName!),
-                        trailing: Icon(Icons.edit),
+                         title: Text("Full Name"),
+                         subtitle: Text((authProviderInstance!.userCredential!=null)?(authProviderInstance!.profile==null)?"":authProviderInstance!.profile!["email"]:authProviderInstance!.profile!["name"]),
+
+                         trailing: Icon(Icons.edit),
                       ),
                        ListTile(
                         title: const Text("Email"),
-                        subtitle: Text(authProviderInstance!.userCredential!.email!),
+                        subtitle: Text((authProviderInstance!.userCredential!=null)?(authProviderInstance!.profile==null)?authProviderInstance!.userCredential!.email!:authProviderInstance!.profile!["email"]:authProviderInstance!.profile!["email"]),
                         trailing: const Icon(Icons.edit),
                       ),
                       // const ListTile(
