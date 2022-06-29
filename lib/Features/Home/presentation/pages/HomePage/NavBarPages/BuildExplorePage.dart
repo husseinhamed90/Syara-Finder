@@ -105,11 +105,11 @@ class _buildExplorePageState extends State<buildExplorePage> {
                             buildButton(
                                 textSize: 16,
                                 onTap: () async {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             FilteredList()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              FilteredList()));
                                  // FirebaseService.signOutFromAccount();
                                 },
                                 buttonText: 'Search',

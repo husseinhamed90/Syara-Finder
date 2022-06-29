@@ -20,40 +20,38 @@ class profile extends StatelessWidget {
         backgroundColor: HexColor("#F9FBFC"),
         body: Stack(
           children: <Widget>[
-            Column(
+            ListView(
               children: <Widget>[
                 const SizedBox(height: 20.0),
-                Align(
+                Container(
                   alignment: Alignment.centerLeft,
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 20),
-                    child: const Text(
-                      "Your Information",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: const Text(
+                    "Your Information",
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 20.0),
                 Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  width: MediaQuery.of(context).size.width / 1.15,
+                  alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
                     color: HexColor("#F3F3F3"),
-                    borderRadius: BorderRadius.circular(5.0),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children:  <Widget>[
                       const SizedBox(height: 10.0),
-                       ListTile(
+                      ListTile(
                         // ignore: prefer_const_constructors
-                         title: Text("Full Name"),
-                         subtitle: Text((authProviderInstance!.userCredential!=null)?(authProviderInstance!.profile==null)?"":authProviderInstance!.profile!["email"]:authProviderInstance!.profile!["name"]),
+                        title: Text("Full Name"),
+                        subtitle: Text((authProviderInstance!.userCredential!=null)?(authProviderInstance!.profile==null)?"":authProviderInstance!.profile!["email"]:authProviderInstance!.profile!["name"]),
 
-                         trailing: Icon(Icons.edit),
+                        trailing: Icon(Icons.edit),
                       ),
-                       ListTile(
+                      ListTile(
                         title: const Text("Email"),
                         subtitle: Text((authProviderInstance!.userCredential!=null)?(authProviderInstance!.profile==null)?authProviderInstance!.userCredential!.email!:authProviderInstance!.profile!["email"]:authProviderInstance!.profile!["email"]),
                         trailing: const Icon(Icons.edit),
@@ -68,26 +66,23 @@ class profile extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20.0),
-                Align(
+                Container(
                   alignment: Alignment.centerLeft,
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 20),
-                    child: const Text(
-                      "About",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Text(
+                    "About",
+                    style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 20.0),
                 Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  width: MediaQuery.of(context).size.width / 1.15,
+                  alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
                     color: HexColor("#F3F3F3"),
-                    borderRadius: BorderRadius.circular(5.0),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: const <Widget>[
                       SizedBox(height: 10.0),
