@@ -16,11 +16,9 @@ class CarInfomation extends StatelessWidget {
     required this.car,
   }) : super(key: key);
 
-  HomeProvider? appProviderInstance;
 
   @override
   Widget build(BuildContext context) {
-    appProviderInstance = Provider.of<HomeProvider>(context);
     return Container(
       width: double.infinity,
       height: 100.h,
@@ -69,14 +67,14 @@ class CarInfomation extends StatelessWidget {
                           child: InkWell(
                             splashColor: Colors.white, // Splash color
                             onTap: () {
-                              if(appProviderInstance!.isCarlInFavourites(car)){
-                                appProviderInstance!.removeFromFavourites(car);
+                              if(context.read<HomeProvider>().isCarlInFavourites(car)){
+                                context.read<HomeProvider>().removeFromFavourites(car);
                               }
                               else{
-                                appProviderInstance!.addToFavourites(car);
+                                context.read<HomeProvider>().addToFavourites(car);
                               }
                             },
-                            child: SizedBox(width: 40.h, height: 40.h, child: Icon(appProviderInstance!.isCarlInFavourites(car)?Icons.favorite:Icons.favorite_border_outlined,size: 20.h,color: Color(0xffEE4B42),)),
+                            child: SizedBox(width: 40.h, height: 40.h, child: Icon(context.watch<HomeProvider>().isCarlInFavourites(car)?Icons.favorite:Icons.favorite_border_outlined,size: 20.h,color: Color(0xffEE4B42),)),
                           ),
                         ),
                       ),

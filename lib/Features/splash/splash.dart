@@ -25,8 +25,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  AuthProvider? authProvider;
-
   double largeContainerWidth =0;
   double largeContainerHeight =0;
   double iconContainerH=80;
@@ -64,7 +62,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -126,7 +123,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         onEnd: () async {
                           if (FirebaseAuth.instance.currentUser != null) {
                           // signed in
-                            authProvider!.getLoggedInUser();
+                            context.read<AuthProvider>().getLoggedInUser();
                             Navigator.of(context).pushReplacement(PageTransition(
                               type: PageTransitionType.bottomToTop,
                               child: explorePage(),

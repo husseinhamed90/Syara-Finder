@@ -3,12 +3,11 @@ import 'package:syara_finder/Features/BrandsAndModelsAndCars/domain/repositories
 import '../../../../Core/Componantes.dart';
 import '../../../../injection_container.dart';
 import '../../data/models/Car.dart';
-import '../../data/remote/data_sources/ApiService.dart';
 import 'package:syara_finder/Features/BrandsAndModelsAndCars/domain/entities/BrandEntity.dart';
 import '../../data/models/Model.dart';
 
 class BrandsAndModelsCarsProvider extends ChangeNotifier{
-  BrandEntity currentBrand = BrandEntity();
+  BrandEntity currentBrand = const BrandEntity();
   Model? selectedModel;
   int selectedYear = 0;
   TextEditingController locationController = TextEditingController();

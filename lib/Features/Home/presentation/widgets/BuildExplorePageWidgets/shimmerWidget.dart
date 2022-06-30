@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../../BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
 
 class ShimmerWidget extends StatefulWidget {
   @override
@@ -30,16 +33,14 @@ class _ShimmerWidgetState extends State<ShimmerWidget> {
                     Expanded(
                       flex: 30,
                       child: Container(
-                        child: Container(
-                          width: 180,
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft:
-                                  Radius.circular(20),
-                                  topRight:
-                                  Radius.circular(20))),
-                        ),
+                        width: 180,
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft:
+                                Radius.circular(20),
+                                topRight:
+                                Radius.circular(20))),
                       ),
                     ),
                     Expanded(

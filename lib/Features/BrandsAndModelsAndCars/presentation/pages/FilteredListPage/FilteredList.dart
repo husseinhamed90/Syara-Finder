@@ -11,12 +11,10 @@ import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:provider/provider.dart';
 
 class FilteredList extends StatelessWidget {
-  BrandsAndModelsCarsProvider ?brandsAndModelsAndCarsProviderInstance;
   List<Car>filteredCars=[];
 
   @override
   Widget build(BuildContext context) {
-    brandsAndModelsAndCarsProviderInstance = Provider.of<BrandsAndModelsCarsProvider>(context);
     return Scaffold(
       appBar: buildAppBar(context, "Explore"),
       body: SafeArea(
@@ -27,7 +25,7 @@ class FilteredList extends StatelessWidget {
               Container(
                 child: buildTextField(
                     hintText: "Location",
-                    controller: brandsAndModelsAndCarsProviderInstance!.locationController,
+                    controller: context.watch<BrandsAndModelsCarsProvider>().locationController,
                 ),
               ),
               SizedBox(height: 35.h,),
@@ -40,14 +38,14 @@ class FilteredList extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          buildSection(title: "Brand",subTitle: (brandsAndModelsAndCarsProviderInstance!.currentBrand.brandName!=null)?brandsAndModelsAndCarsProviderInstance!.currentBrand.brandName:"No Brand Selected",context: context,nextPage: brandsPage(),isClickable: false),
+                          buildSection(title: "Brand",subTitle: (context.watch<BrandsAndModelsCarsProvider>().currentBrand.brandName!=null)?context.watch<BrandsAndModelsCarsProvider>().currentBrand.brandName:"No Brand Selected",context: context,nextPage: brandsPage(),isClickable: false),
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: 20.5.w),
                             height: 52.h,
                             width: 1.w,
                             color: const Color(0xff959595),
                           ),
-                          buildSection(title: "Model",subTitle:(brandsAndModelsAndCarsProviderInstance!.selectedModel!=null)?brandsAndModelsAndCarsProviderInstance!.selectedModel!.modelName:"No Model Selected"  ,context: context,nextPage: modelsPage(),isClickable: false),
+                          buildSection(title: "Model",subTitle:(context.watch<BrandsAndModelsCarsProvider>().selectedModel!=null)?context.watch<BrandsAndModelsCarsProvider>().selectedModel!.modelName:"No Model Selected"  ,context: context,nextPage: modelsPage(),isClickable: false),
                         ],
                       ),
                     )
@@ -57,7 +55,7 @@ class FilteredList extends StatelessWidget {
               SizedBox(height: 85.h,child: Row(
                 children: [
                   ValueListenableBuilder<List<Car>>(
-                    valueListenable: brandsAndModelsAndCarsProviderInstance!.filteredCars,
+                    valueListenable: context.watch<BrandsAndModelsCarsProvider>().filteredCars,
                       builder: (context, value, child) => CustomTextForFilteredListPage(text:"${value.length} cars found",color: const Color(0xff959595))),
                   const Spacer(),
                   CustomTextForFilteredListPage(text: "Filters",color: const Color(0xffFF8308)),
@@ -65,7 +63,7 @@ class FilteredList extends StatelessWidget {
                   const Icon(Icons.filter_list_outlined,color: Color(0xffFF8308),)
                 ],
               ),),
-              listOfCars(filteredars: brandsAndModelsAndCarsProviderInstance!.filterCar(brandsAndModelsAndCarsProviderInstance!.currentBrand.brandName!),)
+              listOfCars(filteredars: context.watch<BrandsAndModelsCarsProvider>().filterCar(context.watch<BrandsAndModelsCarsProvider>().currentBrand.brandName!),)
             ],
           ),
         ),

@@ -15,24 +15,20 @@ class modelsPage extends StatefulWidget {
 }
 
 class _modelsPageState extends State<modelsPage> {
-  BrandsAndModelsCarsProvider? brandsAndModelsAndCarsProviderInstance;
+  //BrandsAndModelsCarsProvider? brandsAndModelsAndCarsProviderInstance;
 
   @override
   void initState() {
     // TODO: implement initState
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      brandsAndModelsAndCarsProviderInstance = Provider.of<BrandsAndModelsCarsProvider>(context, listen: false);
-     // appProviderInstance!.createListOfModels();
-      brandsAndModelsAndCarsProviderInstance!.createListOfYears();
+      context.read<BrandsAndModelsCarsProvider>().createListOfYears();
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    brandsAndModelsAndCarsProviderInstance = Provider.of<BrandsAndModelsCarsProvider>(context);
-
     return Scaffold(
       appBar: buildAppBar(context, "Model And Year"),
       body: SafeArea(
@@ -44,7 +40,7 @@ class _modelsPageState extends State<modelsPage> {
                 child: buildTextField(
                     isModelField: true,
                     hintText: "Model",
-                    controller: brandsAndModelsAndCarsProviderInstance!.modelController,
+                    controller: context.watch<BrandsAndModelsCarsProvider>().modelController,
                     isSearchButton: false,
                     ),
               ),
@@ -55,7 +51,7 @@ class _modelsPageState extends State<modelsPage> {
                 child: buildTextField(
                     isModelField: false,
                     hintText: "Year",
-                    controller: brandsAndModelsAndCarsProviderInstance!.yearController,
+                    controller: context.watch<BrandsAndModelsCarsProvider>().yearController,
                     isSearchButton: false,
                     ),
               ),

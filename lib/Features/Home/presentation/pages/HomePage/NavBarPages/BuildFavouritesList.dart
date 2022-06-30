@@ -13,10 +13,9 @@ class buildFavouritesList extends StatefulWidget {
 }
 
 class _buildFavouritesListState extends State<buildFavouritesList> {
-  HomeProvider? homeProviderInstance;
+
   @override
   Widget build(BuildContext context) {
-    homeProviderInstance = Provider.of<HomeProvider>(context);
 
     return Scaffold(
       appBar: buildAppBar(context,"Favourites"),
@@ -41,7 +40,7 @@ class _buildFavouritesListState extends State<buildFavouritesList> {
                                       borderRadius: BorderRadius.only(topLeft: Radius.circular(26.r),bottomLeft: Radius.circular(26.r)),
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
-                                          image: NetworkImage(homeProviderInstance!.favourites[index].images![0].url.toString())
+                                          image: NetworkImage(context.watch<HomeProvider>().favourites[index].images![0].url.toString())
                                       )
                                   ),
                                 ),
@@ -55,23 +54,23 @@ class _buildFavouritesListState extends State<buildFavouritesList> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      buildTextOfCarPrice("\$ ${homeProviderInstance!.favourites[index].price.toString()}",16),
+                                      buildTextOfCarPrice("\$ ${context.watch<HomeProvider>().favourites[index].price.toString()}",16),
                                        SizedBox(height: 5.h,),
-                                       buildTextOfCarName(homeProviderInstance!.favourites[index].model!.modelName!,14),
+                                       buildTextOfCarName(context.watch<HomeProvider>().favourites[index].model!.modelName!,14),
                                        SizedBox(height: 10.h,),
                                        Container(
                                         margin: EdgeInsets.symmetric(horizontal: 20.5.w),
                                         child: Row(
                                           children: [
-                                            buildIconWithText(text: homeProviderInstance!.favourites[index].carMeter.toString(),icon: Icons.speed_sharp),
+                                            buildIconWithText(text: context.watch<HomeProvider>().favourites[index].carMeter.toString(),icon: Icons.speed_sharp),
                                             SizedBox(width: 46.w,),
-                                            buildIconWithText(text: homeProviderInstance!.favourites[index].year!.yearName.toString(),icon: Icons.calendar_today)
+                                            buildIconWithText(text: context.watch<HomeProvider>().favourites[index].year!.yearName.toString(),icon: Icons.calendar_today)
                                           ],
                                         ),
                                       ),
                                       const Spacer(),
                                       buildButton(textSize: 10,onTap: (){
-                                        openLinkOfCurrentCar(homeProviderInstance!.favourites[index].originUrl!);
+                                        openLinkOfCurrentCar(context.watch<HomeProvider>().favourites[index].originUrl!);
                                       }, buttonText: 'Go to website',height: 38.h,width:98.w ),
                                     ],
                                   ),
@@ -80,10 +79,10 @@ class _buildFavouritesListState extends State<buildFavouritesList> {
                             ],
                           ))
                   ),
-                  buildPositioned(homeProviderInstance!.favourites[index])
+                  buildPositioned(context.watch<HomeProvider>().favourites[index],context)
                 ],
               );
-            },itemCount: homeProviderInstance!.favourites.length),
+            },itemCount: context.watch<HomeProvider>().favourites.length),
           ),
         ],
       ),

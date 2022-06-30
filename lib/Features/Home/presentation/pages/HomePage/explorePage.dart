@@ -10,11 +10,9 @@ import '../../manager/HomeProvider.dart';
 
 class explorePage extends StatelessWidget {
   TextEditingController locationController = TextEditingController();
-  HomeProvider? homeProviderInstance;
 
   @override
   Widget build(BuildContext context) {
-    homeProviderInstance = Provider.of<HomeProvider>(context);
 
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
@@ -35,27 +33,27 @@ class explorePage extends StatelessWidget {
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline, size: 20.h), label: "Profile"),
           ],
-          currentIndex: homeProviderInstance!.navBarSelectedIndex,
+          currentIndex: context.read<HomeProvider>().navBarSelectedIndex,
           selectedItemColor: Colors.amber[800],
           onTap: (value) {
             if(value==2){
 
               if(dependencyInjection.get<AuthProvider>().userCredential==null){
                 if(showDialogWhenProfilePageTapped(context)){
-                  homeProviderInstance!.onPageSelected(value,context);
+                  context.read<HomeProvider>().onPageSelected(value,context);
                 }
               }
               else{
 
-                homeProviderInstance!.onPageSelected(value,context);
+                context.read<HomeProvider>().onPageSelected(value,context);
               }
             }
             else{
-              homeProviderInstance!.onPageSelected(value,context);
+              context.read<HomeProvider>().onPageSelected(value,context);
             }
           },
         ),
-        body: homeProviderInstance!.pages.elementAt(homeProviderInstance!.navBarSelectedIndex));
+        body: context.watch<HomeProvider>().pages.elementAt(context.watch<HomeProvider>().navBarSelectedIndex));
   }
 }
 bool showDialogWhenProfilePageTapped(BuildContext context){

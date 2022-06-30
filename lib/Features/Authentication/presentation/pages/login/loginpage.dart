@@ -5,6 +5,7 @@ import 'package:syara_finder/Features/Authentication/presentation/manager/AuthPr
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
+
 import '../../../../../injection_container.dart';
 import '../../../../Home/presentation/pages/HomePage/explorePage.dart';
 import '../../widgets/LoginPageWidgets/LoginIconButton.dart';
@@ -19,12 +20,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-
-  AuthProvider? authProviderInstance;
   @override
   Widget build(BuildContext context) {
-    authProviderInstance = Provider.of<AuthProvider>(context);
-
     return Scaffold(
       backgroundColor: HexColor("#FFF0DF"),
       body: ListView(
@@ -153,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LoginIconButton(iconLink: "https://img.icons8.com/color/344/gmail-new.png",onPressed: () async {
-                await authProviderInstance!.signInWithGoogleAccount((){
+                await context.read<AuthProvider>().signInWithGoogleAccount((){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => explorePage(),));
                 });
               }),
@@ -161,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: 20,
               ),
               LoginIconButton(iconLink: "https://img.icons8.com/color/344/facebook.png",onPressed: ()async{
-                await authProviderInstance!.signInWithFacebookAccount((){
+                await context.read<AuthProvider>().signInWithFacebookAccount((){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => explorePage(),));
                 });
               }),

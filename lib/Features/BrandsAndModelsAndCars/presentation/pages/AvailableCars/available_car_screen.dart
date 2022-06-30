@@ -1,6 +1,7 @@
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import '../../../../../Core/Constants.dart';
+import '../../../../../injection_container.dart';
 import '../../../../BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
 import '../../../../BrandsAndModelsAndCars/data/models/Car.dart';
 
@@ -13,7 +14,6 @@ class AvailableCarScreen extends StatefulWidget {
 }
 
 class _AvailableCarScreenState extends State<AvailableCarScreen> {
-  BrandsAndModelsCarsProvider? brandsAndModelsAndCarsProviderInstance;
 
   @override
   void initState() {
@@ -22,12 +22,11 @@ class _AvailableCarScreenState extends State<AvailableCarScreen> {
   @override
   Widget build(BuildContext context) {
 
-    brandsAndModelsAndCarsProviderInstance = Provider.of<BrandsAndModelsCarsProvider>(context);
     return Scaffold(
       backgroundColor: mPrimaryColor,
       appBar: buildCustomAppBar(),
       body: FutureBuilder<List<Car>>(
-        future: brandsAndModelsAndCarsProviderInstance!.fetchCars(),
+        future: context.read<BrandsAndModelsCarsProvider>().fetchCars(),
         builder: (BuildContext context, AsyncSnapshot<List<Car>> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(

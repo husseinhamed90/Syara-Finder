@@ -13,7 +13,6 @@ class profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print(authProviderInstance!.additionalUserInfo!);
     return Scaffold(
         appBar: buildAppBar(context, "Profile"),
         backgroundColor: HexColor("#F9FBFC"),

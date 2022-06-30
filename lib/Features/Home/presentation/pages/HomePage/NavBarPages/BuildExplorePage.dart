@@ -32,10 +32,8 @@ class buildExplorePage extends StatefulWidget {
 
 class _buildExplorePageState extends State<buildExplorePage> {
 
-  BrandsAndModelsCarsProvider? brandsAndModelsAndCarsProviderInstance;
   @override
   Widget build(BuildContext context) {
-    brandsAndModelsAndCarsProviderInstance = Provider.of<BrandsAndModelsCarsProvider>(context);
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -156,7 +154,7 @@ class _buildExplorePageState extends State<buildExplorePage> {
               padding: EdgeInsets.only(left: 5, right: 5),
               height: 250,
               child: FutureBuilder<List<Car>>(
-                future: brandsAndModelsAndCarsProviderInstance!.fetchCars(),
+                future: context.read<BrandsAndModelsCarsProvider>().fetchCars(),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<Car>> snapshot) {
                   if (snapshot.hasData) {
@@ -274,7 +272,7 @@ class _buildExplorePageState extends State<buildExplorePage> {
                     SizedBox(
                       height: 200,
                       child: FutureBuilder<List<BrandEntity>>(
-                        future: brandsAndModelsAndCarsProviderInstance!.fetchBrandsFromApi(),
+                        future: context.read<BrandsAndModelsCarsProvider>().fetchBrandsFromApi(),
                         builder: (context, AsyncSnapshot<List<BrandEntity>> snapshot) {
                           if (snapshot.hasData){
                             return ListView.builder(

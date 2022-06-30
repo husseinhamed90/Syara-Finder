@@ -19,10 +19,8 @@ class listOfCars extends StatefulWidget {
 }
 
 class _listOfCarsState extends State<listOfCars> {
-  BrandsAndModelsCarsProvider? brandsAndModelsAndCarsProviderInstance;
   @override
   Widget build(BuildContext context) {
-    brandsAndModelsAndCarsProviderInstance = Provider.of<BrandsAndModelsCarsProvider>(context);
     return Expanded(
       child: ListView.separated(
         separatorBuilder: (context, index) {
@@ -31,7 +29,7 @@ class _listOfCarsState extends State<listOfCars> {
         itemBuilder: (context, index) {
           return carItemInFilteredList(currentCar: context.watch<BrandsAndModelsCarsProvider>().filteredCars.value[index]);
         },
-        itemCount: brandsAndModelsAndCarsProviderInstance!.filteredCars.value.length,
+        itemCount: context.watch<BrandsAndModelsCarsProvider>().filteredCars.value.length,
       ),
       // child: FutureBuilder<List<Car>>(
       //   future: carsProvider!.fetchCars(),

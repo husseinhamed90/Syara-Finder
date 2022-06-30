@@ -14,12 +14,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController fullname = TextEditingController();
   TextEditingController email =  TextEditingController();
   TextEditingController password =  TextEditingController();
-  AuthProvider? authProviderInstance;
 
   @override
   Widget build(BuildContext context) {
-    authProviderInstance = Provider.of<AuthProvider>(context);
-
     return Scaffold(
       backgroundColor: HexColor("#FFF0DF"),
       body: ListView(

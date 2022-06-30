@@ -20,10 +20,8 @@ class carItemInFilteredList extends StatefulWidget {
 
 class _carItemInFilteredListState extends State<carItemInFilteredList> {
 
-  HomeProvider? appProviderInstance;
   @override
   Widget build(BuildContext context) {
-    appProviderInstance = Provider.of<HomeProvider>(context);
     return SizedBox(
       height: 393.h,
       child: Card(
@@ -46,7 +44,7 @@ class _carItemInFilteredListState extends State<carItemInFilteredList> {
                         )
                     ),
                   ),
-                  buildPositioned(widget.currentCar,),
+                  buildPositioned(widget.currentCar,context),
                 ],
               ),
               //  SizedBox(height: 20.h,),

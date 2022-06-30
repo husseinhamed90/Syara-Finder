@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:syara_finder/Features/Authentication/presentation/pages/signning/sign.dart';
 import 'package:syara_finder/Features/BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
 import '../Features/BrandsAndModelsAndCars/data/models/Model.dart';
@@ -148,7 +149,7 @@ Future openLinkOfCurrentCar(String url) async {
   if (!await launchUrl(Uri.parse(url))) throw 'Could not launch $url';
 }
 
-Positioned buildPositioned(Car currentCar) {
+Positioned buildPositioned(Car currentCar,BuildContext context) {
   return Positioned(
     top: 15.h,
     right: 15.w,
@@ -158,14 +159,14 @@ Positioned buildPositioned(Car currentCar) {
         child: InkWell(
           splashColor: Colors.white, // Splash color
           onTap: () {
-            if(dependencyInjection.get<HomeProvider>().isCarlInFavourites(currentCar)){
-              dependencyInjection.get<HomeProvider>().removeFromFavourites(currentCar);
+            if(context.read<HomeProvider>().isCarlInFavourites(currentCar)){
+              context.read<HomeProvider>().removeFromFavourites(currentCar);
             }
             else{
-              dependencyInjection.get<HomeProvider>().addToFavourites(currentCar);
+              context.read<HomeProvider>().addToFavourites(currentCar);
             }
           },
-          child: SizedBox(width: 40.h, height: 40.h, child: Icon(dependencyInjection.get<HomeProvider>().isCarlInFavourites(currentCar)?Icons.favorite:Icons.favorite_border_outlined,size: 20.h,color: Color(0xffEE4B42),)),
+          child: SizedBox(width: 40.h, height: 40.h, child: Icon(context.watch<HomeProvider>().isCarlInFavourites(currentCar)?Icons.favorite:Icons.favorite_border_outlined,size: 20.h,color: const Color(0xffEE4B42),)),
         ),
       ),
     ),
