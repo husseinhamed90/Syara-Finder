@@ -1,11 +1,11 @@
 
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:syara_finder/Features/Authentication/data/local/data_sources/SharedPrefSource.dart';
 import 'package:syara_finder/Features/Authentication/data/remote/data_sources/FirebaseService.dart';
 import 'package:syara_finder/Features/Authentication/domain/repositories/AuthRepository.dart';
-import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
 import 'package:syara_finder/injection_container.dart';
 
 class AuthProvider with ChangeNotifier {

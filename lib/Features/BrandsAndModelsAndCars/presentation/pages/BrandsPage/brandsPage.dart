@@ -1,9 +1,8 @@
 // ignore_for_file: file_names
-
-import 'package:syara_finder/Features/BrandsAndModelsAndCars/domain/entities/BrandEntity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:provider/provider.dart';
+import 'package:syara_finder/Features/BrandsAndModelsAndCars/domain/entities/BrandEntity.dart';
 import '../../../../../Core/Componantes.dart';
 import '../../manager/BrandsAndModelsProvider.dart';
 
@@ -19,12 +18,10 @@ class brandsPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      context.read<BrandsAndModelsCarsProvider>().updateCurrentBrand(
-                          context.read<BrandsAndModelsCarsProvider>().brandsObjects[index]);
+                      context.read<BrandsAndModelsCarsProvider>().updateCurrentBrand(context.read<BrandsAndModelsCarsProvider>().brandsObjects[index]);
                     },
                     child: Container(
-                        color: (context.watch<BrandsAndModelsCarsProvider>().currentBrand.id ==
-                            context.watch<BrandsAndModelsCarsProvider>().brandsObjects[index].id)
+                        color: (context.watch<BrandsAndModelsCarsProvider>().currentBrand.id == context.watch<BrandsAndModelsCarsProvider>().brandsObjects[index].id)
                             ? const Color(0xffFF8308).withOpacity(0.09)
                             : const Color(0xffF9FBFC),
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -37,7 +34,7 @@ class brandsPage extends StatelessWidget {
           }
           else{
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(color: Color(0xffFF8308)),
             );
           }
         },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:syara_finder/Features/Authentication/presentation/pages/signning/sign.dart';
+
 import 'widgets/button_widget.dart';
 
 class OnBoardingPage extends StatelessWidget {
@@ -32,14 +33,14 @@ class OnBoardingPage extends StatelessWidget {
               decoration: getPageDecoration(),
             ),
           ],
-          done: Text('Finished',
+          done: const Text('Finished',
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
           onDone: () => goToHome(context),
           showSkipButton: true,
           skip: Text('Skip', style: TextStyle(color: Colors.white)),
           onSkip: () => goToHome(context),
-          next: Icon(
+          next: const Icon(
             Icons.arrow_forward,
             color: Colors.white,
           ),

@@ -1,11 +1,11 @@
-import '../../../../BrandsAndModelsAndCars/data/models/Car.dart';
-import 'package:syara_finder/Core/Componantes.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:syara_finder/Core/Componantes.dart';
 
+import '../../../../BrandsAndModelsAndCars/data/models/Car.dart';
 import '../../widgets/AvailableCars/FavouriteIcon.dart';
 
 class CarDetails extends StatefulWidget {
@@ -32,8 +32,8 @@ class _MyWidgetState extends State<CarDetails> {
                   height: height * 0.4,
                   children: widget.car.images!
                       .map(
-                        (e) => Image.network(
-                      e.url!,
+                        (e) => CachedNetworkImage(
+                          imageUrl: e.url!,
                       fit: BoxFit.cover,
                     ),
                   )

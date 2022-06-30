@@ -1,8 +1,7 @@
 
 import '../../data/models/Image.dart';
-import '../../data/models/Year.dart';
-
 import '../../data/models/Model.dart';
+import '../../data/models/Year.dart';
 
 
 class  CarEntity{

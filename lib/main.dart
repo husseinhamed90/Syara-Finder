@@ -1,14 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:syara_finder/Features/Authentication/data/local/data_sources/SharedPrefSource.dart';
-import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
-import 'package:syara_finder/Features/BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
-import 'Features/Home/presentation/manager/HomeProvider.dart';
-import 'Features/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:syara_finder/Features/Authentication/data/local/data_sources/SharedPrefSource.dart';
+import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
+import 'package:syara_finder/Features/BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
 
+import 'Features/Home/presentation/manager/HomeProvider.dart';
+import 'Features/splash/splash.dart';
 import 'injection_container.dart' as di;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

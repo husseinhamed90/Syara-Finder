@@ -1,11 +1,12 @@
 // ignore_for_file: file_names
 
-import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
-import 'package:syara_finder/Core/Componantes.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:provider/provider.dart';
+import 'package:syara_finder/Core/Componantes.dart';
+import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
 
 class buildFavouritesList extends StatefulWidget {
   @override
@@ -34,14 +35,16 @@ class _buildFavouritesListState extends State<buildFavouritesList> {
                             children: [
                               Expanded(
                                 flex: 1,
-                                child: Container(
+                                child: SizedBox(
                                   width: 150.w,
-                                  decoration: BoxDecoration(
+                                  child: CachedNetworkImage(imageUrl: context.watch<HomeProvider>().favourites[index].images![0].url!,height: 151.h,fit: BoxFit.cover,imageBuilder: (context, imageProvider) => Container(
+                                    height: 151.h,
+                                    decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(topLeft: Radius.circular(26.r),bottomLeft: Radius.circular(26.r)),
                                       image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(context.watch<HomeProvider>().favourites[index].images![0].url.toString())
-                                      )
+                                          image: imageProvider, fit: BoxFit.cover),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

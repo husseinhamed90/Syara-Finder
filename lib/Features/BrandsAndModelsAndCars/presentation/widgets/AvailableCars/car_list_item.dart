@@ -1,5 +1,6 @@
-import 'package:syara_finder/Core/Componantes.dart';
 import 'package:flutter/material.dart';
+import 'package:syara_finder/Core/Componantes.dart';
+
 import '../../../../BrandsAndModelsAndCars/data/models/Car.dart';
 import 'car_infomation.dart';
 

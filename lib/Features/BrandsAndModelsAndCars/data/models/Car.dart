@@ -3,7 +3,6 @@
 import '../../domain/entities/CarEntity.dart';
 import 'Image.dart';
 import 'Model.dart';
-
 import 'Year.dart';
 
 class Car extends CarEntity{

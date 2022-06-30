@@ -1,12 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
-import '../../../../../Core/Constants.dart';
-import '../../../../../injection_container.dart';
-import '../../../../BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
-import '../../../../BrandsAndModelsAndCars/data/models/Car.dart';
 
+import '../../../../../Core/Constants.dart';
+import '../../../../BrandsAndModelsAndCars/data/models/Car.dart';
+import '../../../../BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
 import '../../widgets/AvailableCars/car_list_item.dart';
-import 'package:flutter/material.dart';
 
 class AvailableCarScreen extends StatefulWidget {
   @override

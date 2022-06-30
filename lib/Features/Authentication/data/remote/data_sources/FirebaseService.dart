@@ -4,34 +4,41 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseService {
 
+
+  static FacebookAuth facebookAuth =FacebookAuth.instance;
+
+  static FirebaseAuth firebaseAuth =FirebaseAuth.instance;
+
   static Future<UserCredential?> signInWithFacebook() async {
-    LoginResult facebookLoginResult = await FacebookAuth.instance.login();
+    LoginResult facebookLoginResult = await facebookAuth.login();
     final facebookAuthCredential = FacebookAuthProvider.credential(facebookLoginResult.accessToken!.token);
-    return await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+    return await firebaseAuth.signInWithCredential(facebookAuthCredential);
   }
 
   static Future<UserCredential> signInWithNormalAccount({required String email , required String password})async{
-    return FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    return firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
   }
 
   static Future<UserCredential> createNormalAccount({required String email , required String password})async{
-    return await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+    return await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
   }
 
   static signOutFromGoogle() async{
-    await FirebaseAuth.instance.signOut();
+    await firebaseAuth.signOut();
   }
+
   static signOutFromFacebook() async{
-    await FacebookAuth.instance.logOut();
+    await facebookAuth.logOut();
   }
+
   static Future<void>signOutFromAccount() async{
-    return await FirebaseAuth.instance.signOut();
+    return await firebaseAuth.signOut();
   }
 
   static Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn(scopes: <String>["email"]).signIn();
     final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
     final credential = GoogleAuthProvider.credential(accessToken: googleAuth.accessToken, idToken: googleAuth.idToken,);
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    return await firebaseAuth.signInWithCredential(credential);
   }
 }

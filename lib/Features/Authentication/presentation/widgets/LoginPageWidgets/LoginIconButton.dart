@@ -1,10 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hexcolor/hexcolor.dart';
-
-import '../../../../../injection_container.dart';
-import '../../../../Home/presentation/manager/HomeProvider.dart';
-import '../../../../Home/presentation/pages/HomePage/explorePage.dart';
 
 class LoginIconButton extends StatefulWidget {
   String iconLink;
@@ -19,6 +14,6 @@ class _LoginIconButtonState extends State<LoginIconButton> {
   Widget build(BuildContext context) {
     return IconButton(onPressed: (){
       widget.onPressed();
-    }, icon: Image.network(widget.iconLink));
+    }, icon: CachedNetworkImage(imageUrl: widget.iconLink,));
   }
 }

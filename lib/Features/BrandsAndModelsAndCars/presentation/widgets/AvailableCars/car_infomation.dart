@@ -1,12 +1,13 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../Home/presentation/manager/HomeProvider.dart';
-import '../../../../BrandsAndModelsAndCars/data/models/Car.dart';
 import '../../../../../Core/Constants.dart';
+import '../../../../BrandsAndModelsAndCars/data/models/Car.dart';
+import '../../../../Home/presentation/manager/HomeProvider.dart';
 import 'attribute.dart';
 
 class CarInfomation extends StatelessWidget {
@@ -35,12 +36,10 @@ class CarInfomation extends StatelessWidget {
             flex: 1,
             child: SizedBox(
               height: 110.h,
-             //  width:( MediaQuery.of(context).size.width-20)*0.45,
-              child: Image.network(
+              //  width:( MediaQuery.of(context).size.width-20)*0.45,
+              child:  CachedNetworkImage(
+                imageUrl:  car.images![0].url!,
                 fit: BoxFit.fill,
-              //  height: 140.h,
-                car.images![0].url!,
-
               ),
             ),
           ),

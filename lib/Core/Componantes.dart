@@ -1,16 +1,16 @@
 // ignore_for_file: file_names
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:provider/provider.dart';
 import 'package:syara_finder/Features/Authentication/presentation/pages/signning/sign.dart';
 import 'package:syara_finder/Features/BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
-import '../Features/BrandsAndModelsAndCars/data/models/Model.dart';
-import '../Features/BrandsAndModelsAndCars/presentation/pages/CarDetails/cardetails.dart';
-import '../Features/BrandsAndModelsAndCars/data/models/Car.dart';
-import '../Features/Home/presentation/manager/HomeProvider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../Features/BrandsAndModelsAndCars/data/models/Car.dart';
+import '../Features/BrandsAndModelsAndCars/data/models/Model.dart';
+import '../Features/BrandsAndModelsAndCars/presentation/pages/CarDetails/cardetails.dart';
+import '../Features/Home/presentation/manager/HomeProvider.dart';
 import '../injection_container.dart';
 
 PopupMenuItem<Model> buildPopupMenuItem(Model text) {

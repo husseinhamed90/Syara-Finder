@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:provider/provider.dart';
-import '../../manager/AuthProvider.dart';
+
 import '../SharedComponantes.dart';
 
 class SignUpScreen extends StatefulWidget {

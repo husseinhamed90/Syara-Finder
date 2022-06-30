@@ -1,14 +1,15 @@
 // ignore_for_file: file_names
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
+import 'package:provider/provider.dart';
+import 'package:syara_finder/Core/Componantes.dart';
 import 'package:syara_finder/Features/BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
 import 'package:syara_finder/Features/BrandsAndModelsAndCars/presentation/pages/BrandsPage/brandsPage.dart';
-import 'package:syara_finder/Core/Componantes.dart';
+
 import '../../../data/models/Car.dart';
 import '../../widgets/FilteredListPage/customTextForFilteredListPage.dart';
 import '../../widgets/FilteredListPage/listOfCars.dart';
 import '../ModelsPage/modelsPage.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:provider/provider.dart';
 
 class FilteredList extends StatelessWidget {
   List<Car>filteredCars=[];

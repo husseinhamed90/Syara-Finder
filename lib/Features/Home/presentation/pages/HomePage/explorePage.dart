@@ -3,9 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:provider/provider.dart';
-import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
 import 'package:syara_finder/Core/Componantes.dart';
+import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
 import 'package:syara_finder/injection_container.dart';
+
 import '../../manager/HomeProvider.dart';
 
 class explorePage extends StatelessWidget {

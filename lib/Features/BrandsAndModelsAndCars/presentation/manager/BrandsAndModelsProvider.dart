@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:syara_finder/Features/BrandsAndModelsAndCars/domain/entities/BrandEntity.dart';
 import 'package:syara_finder/Features/BrandsAndModelsAndCars/domain/repositories/BrandsAndModelsRepository.dart';
+
 import '../../../../Core/Componantes.dart';
 import '../../../../injection_container.dart';
 import '../../data/models/Car.dart';
-import 'package:syara_finder/Features/BrandsAndModelsAndCars/domain/entities/BrandEntity.dart';
 import '../../data/models/Model.dart';
 
 class BrandsAndModelsCarsProvider extends ChangeNotifier{

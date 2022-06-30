@@ -1,19 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:async';
-import 'package:provider/provider.dart';
 
-import '../../Features/OnBoarding/onbording.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 import '../../Features/Home/presentation/pages/HomePage/explorePage.dart';
+import '../../Features/OnBoarding/onbording.dart';
 import '../Authentication/presentation/manager/AuthProvider.dart';
-import '../Home/presentation/manager/HomeProvider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -81,7 +79,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   alignment: Alignment.center,
                   children: [
                     AnimatedContainer(
-
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(17.r),
                         color: Colors.white,

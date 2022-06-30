@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, sort_child_properties_last, unused_import, depend_on_referenced_packages, implementation_imports, prefer_const_constructors, non_constant_identifier_names
-
 import 'dart:convert';
 import 'dart:developer';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -11,12 +11,12 @@ import 'package:shimmer/shimmer.dart';
 import 'package:syara_finder/Features/Authentication/data/remote/data_sources/FirebaseService.dart';
 import '../../../../../../Core/Componantes.dart';
 import '../../../../../../injection_container.dart';
+import '../../../../../BrandsAndModelsAndCars/data/models/Car.dart';
 import '../../../../../BrandsAndModelsAndCars/data/remote/data_sources/ApiService.dart';
 import '../../../../../BrandsAndModelsAndCars/domain/entities/BrandEntity.dart';
 import '../../../../../BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
 import '../../../../../BrandsAndModelsAndCars/presentation/pages/AvailableCars/available_car_screen.dart';
 import '../../../../../BrandsAndModelsAndCars/presentation/pages/FilteredListPage/FilteredList.dart';
-import '../../../../../BrandsAndModelsAndCars/data/models/Car.dart';
 import '../../../manager/HomeProvider.dart';
 import '../../../widgets/BuildExplorePageWidgets/LeftOrRightSectionWidget.dart';
 import '../../../widgets/BuildExplorePageWidgets/shimmerWidget.dart';
@@ -174,16 +174,18 @@ class _buildExplorePageState extends State<buildExplorePage> {
                                   tag: snapshot.data![index].images![0].url!,
                                   child: Container(
                                     width: 180,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(snapshot
-                                              .data![index].images![0].url!),
-                                          fit: BoxFit.fill,
-                                        ),
+                                    child: CachedNetworkImage(imageUrl: snapshot.data![index].images![0].url!,imageBuilder: (context, imageProvider) => Container(
+                                      decoration: BoxDecoration(
                                         color: HexColor("#FF8308"),
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20))),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20)),
+                                        image: DecorationImage(
+                                            image: imageProvider, fit: BoxFit.fill),
+                                      ),
+                                    ),
+
+                                    ),
                                   ),
                                   transitionOnUserGestures: true,
                                 ),
@@ -287,10 +289,10 @@ class _buildExplorePageState extends State<buildExplorePage> {
                                 child: Stack(
                                   children: <Widget>[
                                     Center(
-                                      child: Image(
-                                        image: NetworkImage(snapshot.data![index].brandLogo!),
-                                        errorBuilder: (context,object,stackTrace){
-                                          return Image.network("https://img.icons8.com/ios-filled/344/no-image.png",height: 80,);
+                                      child: CachedNetworkImage(
+                                        imageUrl:snapshot.data![index].brandLogo!,
+                                        errorWidget: (context,object,stackTrace){
+                                          return CachedNetworkImage(imageUrl: "https://img.icons8.com/ios-filled/344/no-image.png",);
                                         },
                                         fit: BoxFit.fill,
                                       ),

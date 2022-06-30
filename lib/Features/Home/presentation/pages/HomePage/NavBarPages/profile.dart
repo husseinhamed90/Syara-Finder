@@ -1,8 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
 import 'package:syara_finder/injection_container.dart';
 
 import '../../../../../../Core/Componantes.dart';

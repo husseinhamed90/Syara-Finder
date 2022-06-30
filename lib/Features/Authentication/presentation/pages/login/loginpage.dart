@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
-import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
-import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:provider/provider.dart';
+import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
 import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
 
 import '../../../../../injection_container.dart';

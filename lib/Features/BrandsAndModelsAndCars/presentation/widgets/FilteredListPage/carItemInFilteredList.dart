@@ -1,11 +1,10 @@
 // ignore_for_file: file_names
-import 'package:syara_finder/Core/Componantes.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:provider/provider.dart';
+import 'package:syara_finder/Core/Componantes.dart';
 
 import '../../../data/models/Car.dart';
-import '../../../../Home/presentation/manager/HomeProvider.dart';
 
 class carItemInFilteredList extends StatefulWidget {
   Car currentCar;
@@ -32,17 +31,22 @@ class _carItemInFilteredListState extends State<carItemInFilteredList> {
             children: [
               Stack(
                 children: [
-                  Container(
+                  CachedNetworkImage(
+                    imageUrl: widget.currentCar.images![0].url!,
+                    imageBuilder: (context,imageProvider){
+                      return Container(
+                        height: 393.h*0.4,
+                        decoration: BoxDecoration(
 
-                    height: 393.h*0.4,
-                    decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(topRight: Radius.circular(12.r),topLeft: Radius.circular(12.r)),
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(widget.currentCar.images![0].url.toString())
+                            )
+                        ),
+                      );
+                    },
 
-                        borderRadius: BorderRadius.only(topRight: Radius.circular(12.r),topLeft: Radius.circular(12.r)),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(widget.currentCar.images![0].url.toString())
-                        )
-                    ),
                   ),
                   buildPositioned(widget.currentCar,context),
                 ],
