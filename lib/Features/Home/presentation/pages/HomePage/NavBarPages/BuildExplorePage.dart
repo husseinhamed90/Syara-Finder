@@ -9,17 +9,17 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:syara_finder/Features/Authentication/data/remote/data_sources/FirebaseService.dart';
-import 'package:syara_finder/Features/Cars/presentation/manager/CarsProvider.dart';
-
-import '../../../../../../Shared/Componantes.dart';
-import '../../../../../BrandsAndModels/data/remote/data_sources/ApiService.dart';
-import '../../../../../BrandsAndModels/domain/entities/BrandEntity.dart';
-import '../../../../../BrandsAndModels/presentation/manager/BrandsAndModelsProvider.dart';
-import '../../../../../BrandsAndModels/presentation/pages/FilteredListPage/FilteredList.dart';
-import '../../../../../Cars/data/models/Car.dart';
-import '../../../../../Cars/data/remote/data_sources/CarsApiService.dart';
-import '../../../../../Cars/presentation/pages/AvailableCars/available_car_screen.dart';
+import '../../../../../../Core/Componantes.dart';
+import '../../../../../../injection_container.dart';
+import '../../../../../BrandsAndModelsAndCars/data/remote/data_sources/ApiService.dart';
+import '../../../../../BrandsAndModelsAndCars/domain/entities/BrandEntity.dart';
+import '../../../../../BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
+import '../../../../../BrandsAndModelsAndCars/presentation/pages/AvailableCars/available_car_screen.dart';
+import '../../../../../BrandsAndModelsAndCars/presentation/pages/FilteredListPage/FilteredList.dart';
+import '../../../../../BrandsAndModelsAndCars/data/models/Car.dart';
 import '../../../manager/HomeProvider.dart';
+import '../../../widgets/BuildExplorePageWidgets/LeftOrRightSectionWidget.dart';
+import '../../../widgets/BuildExplorePageWidgets/shimmerWidget.dart';
 
 class buildExplorePage extends StatefulWidget {
   const buildExplorePage({
@@ -32,12 +32,10 @@ class buildExplorePage extends StatefulWidget {
 
 class _buildExplorePageState extends State<buildExplorePage> {
 
-  BrandsAndModelsProvider? brandsAndModelsProviderInstance;
-  CarsProvider? carsProviderInstance;
+  BrandsAndModelsCarsProvider? brandsAndModelsAndCarsProviderInstance;
   @override
   Widget build(BuildContext context) {
-    brandsAndModelsProviderInstance = Provider.of<BrandsAndModelsProvider>(context);
-    carsProviderInstance = Provider.of<CarsProvider>(context);
+    brandsAndModelsAndCarsProviderInstance = Provider.of<BrandsAndModelsCarsProvider>(context);
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -99,9 +97,10 @@ class _buildExplorePageState extends State<buildExplorePage> {
                         padding: EdgeInsets.all(17.h),
                         child: Column(
                           children: [
-                            ...buildUpperPart(
-                                appProviderInstance: brandsAndModelsProviderInstance!,
-                                context: context),
+                            Container(
+                              child: buildTextField(hintText: "Location",controller: dependencyInjection.get<BrandsAndModelsCarsProvider>().locationController),
+                            ),
+                            LeftOrRightSection(isClickable: true,),
                             buildButton(
                                 textSize: 16,
                                 onTap: () async {
@@ -110,7 +109,6 @@ class _buildExplorePageState extends State<buildExplorePage> {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               FilteredList()));
-                                 // FirebaseService.signOutFromAccount();
                                 },
                                 buttonText: 'Search',
                                 height: 60.h,
@@ -158,7 +156,7 @@ class _buildExplorePageState extends State<buildExplorePage> {
               padding: EdgeInsets.only(left: 5, right: 5),
               height: 250,
               child: FutureBuilder<List<Car>>(
-                future: carsProviderInstance!.fetchCars(),
+                future: brandsAndModelsAndCarsProviderInstance!.fetchCars(),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<Car>> snapshot) {
                   if (snapshot.hasData) {
@@ -247,7 +245,7 @@ class _buildExplorePageState extends State<buildExplorePage> {
                     );
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return buildShimmer();
+                    return ShimmerWidget();
                   }
                   return Center(
                     child: Text("loading..."),
@@ -276,7 +274,7 @@ class _buildExplorePageState extends State<buildExplorePage> {
                     SizedBox(
                       height: 200,
                       child: FutureBuilder<List<BrandEntity>>(
-                        future: BrandsAndModelsApiService.fetchBrands(),
+                        future: brandsAndModelsAndCarsProviderInstance!.fetchBrandsFromApi(),
                         builder: (context, AsyncSnapshot<List<BrandEntity>> snapshot) {
                           if (snapshot.hasData){
                             return ListView.builder(
@@ -320,7 +318,7 @@ class _buildExplorePageState extends State<buildExplorePage> {
                             );
                           }
                           if (snapshot.connectionState == ConnectionState.waiting) {
-                            return buildShimmer();
+                            return ShimmerWidget();
                           }
                           return Center(
                             child: Text("loading..."),

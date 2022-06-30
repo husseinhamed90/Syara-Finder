@@ -5,8 +5,10 @@ import 'package:syara_finder/Features/Authentication/presentation/manager/AuthPr
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
-import 'package:syara_finder/Shared/Componantes.dart';
+import '../../../../../injection_container.dart';
 import '../../../../Home/presentation/pages/HomePage/explorePage.dart';
+import '../../widgets/LoginPageWidgets/LoginIconButton.dart';
+import '../SharedComponantes.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -19,17 +21,16 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController password = TextEditingController();
 
   AuthProvider? authProviderInstance;
-  HomeProvider ?homeProvider;
   @override
   Widget build(BuildContext context) {
     authProviderInstance = Provider.of<AuthProvider>(context);
-    homeProvider = Provider.of<HomeProvider>(context);
 
     return Scaffold(
       backgroundColor: HexColor("#FFF0DF"),
       body: ListView(
         children: <Widget>[
           SizedBox(height: 40,),
+          buildSkipButton(context),
           Padding(
             padding: const EdgeInsets.only(top: 0),
             child: Center(
@@ -123,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: ElevatedButton(
                 onPressed: () async{
-                  homeProvider!.returnNavBarToHome();
+                  dependencyInjection.get<HomeProvider>().returnNavBarToHome();
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => explorePage()),
@@ -151,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              buildIconButton(iconLink: "https://img.icons8.com/color/344/gmail-new.png",onPressed: () async {
+              LoginIconButton(iconLink: "https://img.icons8.com/color/344/gmail-new.png",onPressed: () async {
                 await authProviderInstance!.signInWithGoogleAccount((){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => explorePage(),));
                 });
@@ -159,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 20,
               ),
-              buildIconButton(iconLink: "https://img.icons8.com/color/344/facebook.png",onPressed: ()async{
+              LoginIconButton(iconLink: "https://img.icons8.com/color/344/facebook.png",onPressed: ()async{
                 await authProviderInstance!.signInWithFacebookAccount((){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => explorePage(),));
                 });
@@ -167,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 20,
               ),
-              buildIconButton(iconLink: "https://cdn-icons-png.flaticon.com/512/0/747.png",onPressed: ()async {
+              LoginIconButton(iconLink: "https://cdn-icons-png.flaticon.com/512/0/747.png",onPressed: ()async {
               }),
             ],
           ),

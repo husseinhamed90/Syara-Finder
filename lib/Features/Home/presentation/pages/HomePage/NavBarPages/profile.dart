@@ -3,20 +3,19 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
+import 'package:syara_finder/injection_container.dart';
 
-import '../../../../../../Shared/Componantes.dart';
+import '../../../../../../Core/Componantes.dart';
 import '../../../../../Authentication/presentation/manager/AuthProvider.dart';
 import '../../../../../Authentication/presentation/pages/signning/sign.dart';
 
 class profile extends StatelessWidget {
-  AuthProvider? authProviderInstance;
-  HomeProvider? homeProviderInstance;
+
   @override
   Widget build(BuildContext context) {
-    authProviderInstance = Provider.of<AuthProvider>(context);
-    homeProviderInstance = Provider.of<HomeProvider>(context);
+    //print(authProviderInstance!.additionalUserInfo!);
     return Scaffold(
-        appBar: buildAppBar(context, "Profile", homeProviderInstance!),
+        appBar: buildAppBar(context, "Profile"),
         backgroundColor: HexColor("#F9FBFC"),
         body: Stack(
           children: <Widget>[
@@ -30,7 +29,7 @@ class profile extends StatelessWidget {
                   child: const Text(
                     "Your Information",
                     style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 20.0),
@@ -47,13 +46,13 @@ class profile extends StatelessWidget {
                       ListTile(
                         // ignore: prefer_const_constructors
                         title: Text("Full Name"),
-                        subtitle: Text((authProviderInstance!.userCredential!=null)?(authProviderInstance!.profile==null)?"":authProviderInstance!.profile!["email"]:authProviderInstance!.profile!["name"]),
+                        subtitle: Text((dependencyInjection.get<AuthProvider>().userCredential!=null)?(dependencyInjection.get<AuthProvider>().profile==null)?"":dependencyInjection.get<AuthProvider>().profile!["email"]:dependencyInjection.get<AuthProvider>().profile!["name"]),
 
                         trailing: Icon(Icons.edit),
                       ),
                       ListTile(
                         title: const Text("Email"),
-                        subtitle: Text((authProviderInstance!.userCredential!=null)?(authProviderInstance!.profile==null)?authProviderInstance!.userCredential!.email!:authProviderInstance!.profile!["email"]:authProviderInstance!.profile!["email"]),
+                        subtitle: Text((dependencyInjection.get<AuthProvider>().userCredential!=null)?(dependencyInjection.get<AuthProvider>().profile==null)?dependencyInjection.get<AuthProvider>().userCredential!.email!:dependencyInjection.get<AuthProvider>().profile!["email"]:dependencyInjection.get<AuthProvider>().profile!["email"]),
                         trailing: const Icon(Icons.edit),
                       ),
                       // const ListTile(
@@ -106,7 +105,7 @@ class profile extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           backgroundColor: HexColor("#FF8308"),
           onPressed: () {
-            authProviderInstance!.logOutFromAccount().then((value) {
+            dependencyInjection.get<AuthProvider>().logOutFromAccount().then((value) {
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => signning(),));
             });
           },

@@ -106,26 +106,26 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                     AnimatedPositioned(
 
-                      duration: Duration(milliseconds: 900),
-                      onEnd: (){
-                        setState(() {
-                          fontSize=45.sp;
-                          largeContainerHeight=90.h;
-                          largeContainerWidth=90.h;
-                          iconContainerH=50.h;
-                          iconContainerW=50.h;
-                          iconSize=40.h;
-                          searchIconHeight=200.h;
-                        });
-                      },
-                      top: searchIconHeight,
+                        duration: Duration(milliseconds: 900),
+                        onEnd: (){
+                          setState(() {
+                            fontSize=45.sp;
+                            largeContainerHeight=90.h;
+                            largeContainerWidth=90.h;
+                            iconContainerH=50.h;
+                            iconContainerW=50.h;
+                            iconSize=40.h;
+                            searchIconHeight=200.h;
+                          });
+                        },
+                        top: searchIconHeight,
                       child: AnimatedContainer(
                         height: iconContainerH,
                         width: iconContainerW,
                         duration: Duration(milliseconds: 900),
                         onEnd: () async {
                           if (FirebaseAuth.instance.currentUser != null) {
-                            // signed in
+                          // signed in
                             authProvider!.getLoggedInUser();
                             Navigator.of(context).pushReplacement(PageTransition(
                               type: PageTransitionType.bottomToTop,
@@ -142,7 +142,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         decoration: BoxDecoration(
 
                             image: DecorationImage(
-                                image: AssetImage("assets/icons/searchIcon.png"),
+                                image: AssetImage("assets/icons/logo.png"),
                                 fit: BoxFit.cover)
                         ),
                       ),

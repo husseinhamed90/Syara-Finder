@@ -6,12 +6,9 @@ import 'package:syara_finder/Features/Authentication/data/local/data_sources/Sha
 import 'package:syara_finder/Features/Authentication/data/remote/data_sources/FirebaseService.dart';
 import 'package:syara_finder/Features/Authentication/domain/repositories/AuthRepository.dart';
 import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
+import 'package:syara_finder/injection_container.dart';
 
 class AuthProvider with ChangeNotifier {
-  final AuthRepository repository;
-  final HomeProvider homeProvider;
-  final SharedPrefSource sharedPrefSource;
-  AuthProvider(this.repository,this.homeProvider,this.sharedPrefSource);
   User? userCredential;
   AdditionalUserInfo ?additionalUserInfo;
   Map<String,dynamic>?profile;
@@ -20,20 +17,20 @@ class AuthProvider with ChangeNotifier {
 
       additionalUserInfo=value!.additionalUserInfo;
       String encodedMap = json.encode(additionalUserInfo!.profile);
-      await sharedPrefSource.setDataToShared("UserProfile", encodedMap);
+      await dependencyInjection.get<SharedPrefSource>().setDataToShared("UserProfile", encodedMap);
       profile=additionalUserInfo!.profile;
       onEndFunction();
       notifyListeners();
     }).onError((error, stackTrace) {
-      print(error);
+
     });
   }
 
   Future getLoggedInUser()async{
     userCredential = FirebaseAuth.instance.currentUser;
-    bool isKeyExist =await sharedPrefSource.isKeyExist("UserProfile");
+    bool isKeyExist =await dependencyInjection.get<SharedPrefSource>().isKeyExist("UserProfile");
     if(isKeyExist){
-      String? encodedMap = await sharedPrefSource.getDataFromShared("UserProfile");
+      String? encodedMap = await dependencyInjection.get<SharedPrefSource>().getDataFromShared("UserProfile");
       Map<String,dynamic> decodedMap = json.decode(encodedMap!);
       profile=decodedMap;
     }
@@ -43,24 +40,24 @@ class AuthProvider with ChangeNotifier {
     userCredential=null;
     profile=null;
     additionalUserInfo=null;
-    await repository.signOutFromAccount();
-    await sharedPrefSource.removeKey("UserProfile");
+    await dependencyInjection.get<AuthRepository>().signOutFromAccount();
+    await dependencyInjection.get<SharedPrefSource>().removeKey("UserProfile");
   }
   Future signInWithGoogleAccount(Function onEndFunction)async {
-    repository.signInWithGoogleAccount().then((value) {
+    dependencyInjection.get<AuthRepository>().signInWithGoogleAccount().then((value) {
       userCredential=value.user;
       onEndFunction();
       notifyListeners();
     });
   }
   Future signInWithNormalAccount({required String email , required String password})async{
-    return await repository.signInWithNormalAccount(email: email, password: password).then((value){
+    return await dependencyInjection.get<AuthRepository>().signInWithNormalAccount(email: email, password: password).then((value){
       userCredential=value.user;
         notifyListeners();
     });
   }
   Future createNormalAccount({required String email , required String password})async{
-     await repository.createNormalAccount(email: email, password: password).then((value){
+     await dependencyInjection.get<AuthRepository>().createNormalAccount(email: email, password: password).then((value){
        userCredential=value.user;
       notifyListeners();
     });

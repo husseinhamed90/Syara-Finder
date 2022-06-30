@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
-import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
-import 'package:syara_finder/Shared/Componantes.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'dart:convert';
-
-import '../../../../Home/presentation/pages/HomePage/explorePage.dart';
 import '../../manager/AuthProvider.dart';
+import '../SharedComponantes.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -21,20 +14,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController fullname = TextEditingController();
   TextEditingController email =  TextEditingController();
   TextEditingController password =  TextEditingController();
-
   AuthProvider? authProviderInstance;
-  HomeProvider? homeProvider;
+
   @override
   Widget build(BuildContext context) {
     authProviderInstance = Provider.of<AuthProvider>(context);
-    homeProvider = Provider.of<HomeProvider>(context);
 
     return Scaffold(
       backgroundColor: HexColor("#FFF0DF"),
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 40,),
-          buildSkipButton(context,homeProvider!),
+          buildSkipButton(context),
           const SizedBox(height: 20,),
 
           const Center(

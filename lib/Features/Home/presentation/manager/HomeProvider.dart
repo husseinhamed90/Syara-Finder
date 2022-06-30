@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../Shared/Componantes.dart';
-import '../../../Cars/data/models/Car.dart';
+import '../../../BrandsAndModelsAndCars/data/models/Car.dart';
 import '../pages/HomePage/NavBarPages/BuildExplorePage.dart';
 import '../pages/HomePage/NavBarPages/BuildFavouritesList.dart';
 import '../pages/HomePage/NavBarPages/profile.dart';

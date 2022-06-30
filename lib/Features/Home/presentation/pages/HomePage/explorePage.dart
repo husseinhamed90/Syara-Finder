@@ -4,18 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:provider/provider.dart';
 import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
-import 'package:syara_finder/Shared/Componantes.dart';
+import 'package:syara_finder/Core/Componantes.dart';
+import 'package:syara_finder/injection_container.dart';
 import '../../manager/HomeProvider.dart';
 
 class explorePage extends StatelessWidget {
   TextEditingController locationController = TextEditingController();
-  HomeProvider? appProviderInstance;
-  AuthProvider? authProvider;
+  HomeProvider? homeProviderInstance;
 
   @override
   Widget build(BuildContext context) {
-    appProviderInstance = Provider.of<HomeProvider>(context);
-    authProvider = Provider.of<AuthProvider>(context);
+    homeProviderInstance = Provider.of<HomeProvider>(context);
 
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
@@ -36,28 +35,36 @@ class explorePage extends StatelessWidget {
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline, size: 20.h), label: "Profile"),
           ],
-          currentIndex: appProviderInstance!.navBarSelectedIndex,
+          currentIndex: homeProviderInstance!.navBarSelectedIndex,
           selectedItemColor: Colors.amber[800],
           onTap: (value) {
             if(value==2){
 
-              print(authProvider!.profile);
-
-              if(authProvider!.userCredential==null){
-                if(showDialogWhenProfilePageTapped(context,authProvider!)){
-                  appProviderInstance!.onPageSelected(value,context);
+              if(dependencyInjection.get<AuthProvider>().userCredential==null){
+                if(showDialogWhenProfilePageTapped(context)){
+                  homeProviderInstance!.onPageSelected(value,context);
                 }
               }
               else{
 
-                appProviderInstance!.onPageSelected(value,context);
+                homeProviderInstance!.onPageSelected(value,context);
               }
             }
             else{
-              appProviderInstance!.onPageSelected(value,context);
+              homeProviderInstance!.onPageSelected(value,context);
             }
           },
         ),
-        body: appProviderInstance!.pages.elementAt(appProviderInstance!.navBarSelectedIndex));
+        body: homeProviderInstance!.pages.elementAt(homeProviderInstance!.navBarSelectedIndex));
+  }
+}
+bool showDialogWhenProfilePageTapped(BuildContext context){
+  if (dependencyInjection.get<AuthProvider>().userCredential == null&&dependencyInjection.get<AuthProvider>().additionalUserInfo==null
+      &&dependencyInjection.get<AuthProvider>().profile==null) {
+    showDialogWithMessage(context: context,message: "You Should Be Logged In First To Show Your Profile");
+    return false;
+  }
+  else{
+    return true;
   }
 }
