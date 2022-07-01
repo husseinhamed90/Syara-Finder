@@ -4,7 +4,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../../../../../Core/Constants.dart';
+import '../../../../../injection_container.dart';
+import '../../local/data_sources/SharedPrefSource.dart';
 class AuthApiService{
+
     Future<UserEntity> login({required String username,required String password}) async {
       final response = await http.post(Uri.parse("$BASE_URL_FOR_AUTH/login/"),body: json.encode(<String, String>{
         "username":username,
@@ -14,13 +17,14 @@ class AuthApiService{
     );
     if (response.statusCode == 201) {
       final result = json.decode(response.body);
-      print(result);
+      dependencyInjection.get<SharedPrefSource>().setDataToShared("UserProfile",response.body);
       return UserModel.fromJson(result);
     } else {
       throw Exception('Failed to login');
     }
   }
-  Future<UserEntity>register({required String email,required String password,required String username})async{
+
+    Future<UserEntity>register({required String email,required String password,required String username})async{
     final response = await http.post(Uri.parse("$BASE_URL_FOR_AUTH/register/"),body: json.encode(<String, String>{
       "username":username,
       "email":email,
@@ -32,7 +36,7 @@ class AuthApiService{
     );
     if (response.statusCode == 200) {
       final result = json.decode(response.body);
-      print(result);
+      dependencyInjection.get<SharedPrefSource>().setDataToShared("UserProfile",response.body);
       return UserModel.fromJson(result);
     } else {
       throw Exception('Failed to register');

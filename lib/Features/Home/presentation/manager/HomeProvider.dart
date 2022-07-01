@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 
 import '../../../BrandsAndModelsAndCars/data/models/Car.dart';
@@ -8,6 +10,28 @@ import '../pages/HomePage/NavBarPages/profile.dart';
 class HomeProvider extends ChangeNotifier{
   //NavBar
   static const TextStyle optionStyle = TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+  Timer ?timer;
+  bool isWantToLog =false;
+  bool isCancel =false;
+
+  void changeIsWantToLogState(bool newState){
+    isWantToLog =newState;
+    notifyListeners();
+  }
+
+  void changeIsCancelState(bool newState){
+    isCancel =newState;
+    notifyListeners();
+  }
+
+  void initTimer(Timer t){
+    timer=t;
+    notifyListeners();
+  }
+  void cancelTimer(){
+    timer!.cancel();
+    notifyListeners();
+  }
 
   List<Widget> pages = <Widget>[ const buildExplorePage(),buildFavouritesList(),profile(),];
   int navBarSelectedIndex = 0;

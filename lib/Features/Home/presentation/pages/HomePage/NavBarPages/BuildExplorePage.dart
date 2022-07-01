@@ -272,7 +272,7 @@ class _buildExplorePageState extends State<buildExplorePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(
-                      height: 200,
+                      height: 150,
                       child: FutureBuilder<List<BrandEntity>>(
                         future: context.read<BrandsAndModelsCarsProvider>().fetchBrandsFromApi(),
                         builder: (context, AsyncSnapshot<List<BrandEntity>> snapshot) {
@@ -280,39 +280,41 @@ class _buildExplorePageState extends State<buildExplorePage> {
                             return ListView.builder(
                               itemCount: snapshot.data!.length,
                               scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) => Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius: BorderRadius.circular(20)),
-                                width: 280,
-                                margin: EdgeInsets.all(10),
-                                child: Stack(
-                                  children: <Widget>[
-                                    Center(
-                                      child: CachedNetworkImage(
-                                        imageUrl:snapshot.data![index].brandLogo!,
-                                        errorWidget: (context,object,stackTrace){
-                                          return CachedNetworkImage(imageUrl: "https://img.icons8.com/ios-filled/344/no-image.png",);
-                                        },
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    Positioned.fill(
-                                      child: Container(
-                                        margin: EdgeInsets.all(20),
-                                        child: Align(
-                                          alignment: Alignment.bottomLeft,
-                                          child: Text(
-                                            snapshot.data![index].brandName!,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.bold),
-                                          ),
+                              itemBuilder: (context, index) => Card(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                 //     color: Colors.grey,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  width: 280,
+                                  margin: EdgeInsets.all(10),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Center(
+                                        child: CachedNetworkImage(
+                                          imageUrl:snapshot.data![index].brandLogo!,height: 80,
+                                          errorWidget: (context,object,stackTrace){
+                                            return CachedNetworkImage(imageUrl: "https://img.icons8.com/ios-filled/344/no-image.png",height: 80,);
+                                          },
+                                          fit: BoxFit.fill,
                                         ),
                                       ),
-                                    )
-                                  ],
+                                      Positioned.fill(
+                                        child: Container(
+                                          margin: EdgeInsets.all(20),
+                                          child: Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Text(
+                                              snapshot.data![index].brandName!,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 25,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             );

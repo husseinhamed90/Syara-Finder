@@ -37,6 +37,10 @@ class explorePage extends StatelessWidget {
           currentIndex: context.read<HomeProvider>().navBarSelectedIndex,
           selectedItemColor: Colors.amber[800],
           onTap: (value) {
+           // print(dependencyInjection.get<AuthProvider>().userCredential!.providerData[0]);
+           // print(dependencyInjection.get<AuthProvider>().profile);
+         //   print(dependencyInjection.get<AuthProvider>().additionalUserInfo);
+          //  print(dependencyInjection.get<AuthProvider>().userCredential);
             if(value==2){
 
               if(dependencyInjection.get<AuthProvider>().userEntity==null){
@@ -58,8 +62,7 @@ class explorePage extends StatelessWidget {
   }
 }
 bool showDialogWhenProfilePageTapped(BuildContext context){
-  if (dependencyInjection.get<AuthProvider>().userEntity == null&&dependencyInjection.get<AuthProvider>().additionalUserInfo==null
-      &&dependencyInjection.get<AuthProvider>().profile==null) {
+  if (dependencyInjection.get<AuthProvider>().userEntity==null) {
     showDialogWithMessage(context: context,message: "You Should Be Logged In First To Show Your Profile");
     return false;
   }

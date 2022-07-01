@@ -8,7 +8,7 @@ import '../../data/models/Car.dart';
 import '../../data/models/Model.dart';
 
 class BrandsAndModelsCarsProvider extends ChangeNotifier{
-  BrandEntity currentBrand = const BrandEntity();
+  BrandEntity currentBrand =  const BrandEntity();
   Model? selectedModel;
   int selectedYear = 0;
   TextEditingController locationController = TextEditingController();
@@ -23,7 +23,7 @@ class BrandsAndModelsCarsProvider extends ChangeNotifier{
     cars =await dependencyInjection.get<BrandsAndModelsRepository>().fetchCars();
     return cars!;
   }
-  List<Car>filterCar(String brandName){
+  List<Car>filterCar(String? brandName){
     filteredCars.value =cars!.where((element) => element.model!.brand!.brandName==brandName).toList();
     return filteredCars.value;
   }

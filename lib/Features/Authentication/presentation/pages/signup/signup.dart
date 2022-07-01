@@ -4,7 +4,7 @@ import 'package:syara_finder/Features/Authentication/presentation/manager/AuthPr
 import 'package:syara_finder/injection_container.dart';
 
 import '../../../../Home/presentation/pages/HomePage/explorePage.dart';
-import '../SharedComponantes.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -24,9 +24,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 40,),
-          buildSkipButton(context),
-          const SizedBox(height: 20,),
-
           const Center(
             child: Text(
               "Create Account",

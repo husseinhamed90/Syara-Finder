@@ -13,6 +13,7 @@ class profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //print(dependencyInjection.get<AuthProvider>().userEntity!.toJson());
     return Scaffold(
         appBar: buildAppBar(context, "Profile"),
         backgroundColor: HexColor("#F9FBFC"),
@@ -45,9 +46,7 @@ class profile extends StatelessWidget {
                       ListTile(
 
                         title: const Text("Full Name"),
-                        subtitle: Text((dependencyInjection.get<AuthProvider>().userEntity!=null)
-                            ?("${dependencyInjection.get<AuthProvider>().userEntity!.username}")
-                            :("${dependencyInjection.get<AuthProvider>().additionalUserInfo!.profile!["name"]}")),
+                        subtitle: Text(dependencyInjection.get<AuthProvider>().userEntity!.username!),
                         trailing: const Icon(Icons.edit),
                       ),
                       ListTile(
@@ -56,10 +55,7 @@ class profile extends StatelessWidget {
                           children: [
                             buildCachedNetworkImage(),
                             const SizedBox(width: 5.0),
-                            Text(
-                                (dependencyInjection.get<AuthProvider>().userEntity!=null)
-                                    ?dependencyInjection.get<AuthProvider>().userEntity!.email
-                                    :dependencyInjection.get<AuthProvider>().additionalUserInfo!.profile!["email"]),
+                            Text(dependencyInjection.get<AuthProvider>().userEntity!.email!),
                           ],
                         ),
                         trailing: const Icon(Icons.edit),
@@ -125,14 +121,13 @@ class profile extends StatelessWidget {
   }
 
   CachedNetworkImage buildCachedNetworkImage() {
-
-    if(dependencyInjection.get<AuthProvider>().additionalUserInfo!=null){
-      if(dependencyInjection.get<AuthProvider>().additionalUserInfo!.providerId=="google.com") {
+    if(dependencyInjection.get<AuthProvider>().userEntity!=null){
+      if(dependencyInjection.get<AuthProvider>().userEntity!.providerName=="google.com") {
         return CachedNetworkImage(
             imageUrl: "https://img.icons8.com/color/344/gmail-new.png",
             height: 25.h);
       }
-      else if(dependencyInjection.get<AuthProvider>().additionalUserInfo!.providerId=="facebook.com") {
+      else if(dependencyInjection.get<AuthProvider>().userEntity!.providerName=="facebook.com") {
         return CachedNetworkImage(
             imageUrl: "https://img.icons8.com/color/344/facebook.png",
             height: 25.h);

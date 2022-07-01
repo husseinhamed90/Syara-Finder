@@ -64,7 +64,7 @@ class FilteredList extends StatelessWidget {
                   const Icon(Icons.filter_list_outlined,color: Color(0xffFF8308),)
                 ],
               ),),
-              listOfCars(filteredars: context.watch<BrandsAndModelsCarsProvider>().filterCar(context.watch<BrandsAndModelsCarsProvider>().currentBrand.brandName!),)
+              listOfCars(filteredars: context.watch<BrandsAndModelsCarsProvider>().filterCar(context.watch<BrandsAndModelsCarsProvider>().currentBrand.brandName),)
             ],
           ),
         ),

@@ -4,22 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
-import 'package:syara_finder/Features/Home/presentation/manager/HomeProvider.dart';
-
 import '../../../../../injection_container.dart';
 import '../../../../Home/presentation/pages/HomePage/explorePage.dart';
 import '../../widgets/LoginPageWidgets/LoginIconButton.dart';
-import '../SharedComponantes.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
+class LoginPage extends StatelessWidget {
 
-class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  late AuthProvider authProvider;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
       body: ListView(
         children: <Widget>[
           SizedBox(height: 40,),
-          buildSkipButton(context),
           Padding(
             padding: const EdgeInsets.only(top: 0),
             child: Center(
@@ -114,35 +107,7 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: 80,
           ),
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-              ),
-              child: ElevatedButton(
-                onPressed: () async{
-                  // dependencyInjection.get<HomeProvider>().returnNavBarToHome();
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => explorePage()),
-                  // );
-                  await dependencyInjection.get<AuthProvider>().signInWithNormalAccount(email: email.text, password: password.text).then((value) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => explorePage()),
-                    );
-                  });
-                },
-                child: Text(
-                  "Login",
-                  style: TextStyle(fontSize: 20),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: HexColor("#FF8308"),
-                  shape: StadiumBorder(),
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                ),
-              )),
+          LoginButton(email: email, password: password),
           SizedBox(
             height: 20,
           ),
@@ -171,6 +136,64 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class LoginButton extends StatelessWidget {
+
+  const LoginButton({
+    Key? key,
+    required this.email,
+    required this.password,
+  }) : super(key: key);
+
+  final TextEditingController email;
+  final TextEditingController password;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 40),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(100)),
+        ),
+        child: !context.watch<AuthProvider>().isLoading?ElevatedButton(
+          onPressed: () async{
+            context.read<AuthProvider>().isLoadingState(true);
+          final snackBar = SnackBar(
+            content: const Text("Invalid User"),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );
+
+
+          await dependencyInjection.get<AuthProvider>().signInWithNormalAccount(email: email.text, password: password.text).then((value) {
+            context.read<AuthProvider>().isLoadingState(false);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => explorePage()),
+            );
+          }).onError((error, stackTrace) {
+            context.read<AuthProvider>().isLoadingState(false);
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          });
+          },
+          child: Text(
+            "Login",
+            style: TextStyle(fontSize: 20),
+          ),
+          style: ElevatedButton.styleFrom(
+            primary: HexColor("#FF8308"),
+            shape: StadiumBorder(),
+            padding: EdgeInsets.symmetric(vertical: 16),
+          ),
+        ):Center(child: CircularProgressIndicator(color: Color(0xffFF8308)),)
     );
   }
 }

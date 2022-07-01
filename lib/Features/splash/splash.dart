@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:syara_finder/injection_container.dart';
 
 import '../../Features/Home/presentation/pages/HomePage/explorePage.dart';
 import '../../Features/OnBoarding/onbording.dart';
@@ -118,19 +119,38 @@ class _SplashScreenState extends State<SplashScreen> {
                         width: iconContainerW,
                         duration: Duration(milliseconds: 900),
                         onEnd: () async {
-                          if (FirebaseAuth.instance.currentUser != null) {
-                          // signed in
-                            context.read<AuthProvider>().getLoggedInUser();
-                            Navigator.of(context).pushReplacement(PageTransition(
-                              type: PageTransitionType.bottomToTop,
-                              child: explorePage(),
-                            ));
-                          } else {
-                            Navigator.of(context).pushReplacement(PageTransition(
-                              type: PageTransitionType.bottomToTop,
-                              child: OnBoardingPage(),
-                            ));
-                          }
+
+                          context.read<AuthProvider>().getLoggedInUser().then((value) {
+                            if(context.read<AuthProvider>().isLoggedUserExist()){
+                              Navigator.of(context).pushReplacement(PageTransition(
+                                type: PageTransitionType.bottomToTop,
+                                child: explorePage(),
+                              ));
+                            }
+                            else{
+                                Navigator.of(context).pushReplacement(PageTransition(
+                                  type: PageTransitionType.bottomToTop,
+                                  child: OnBoardingPage(),
+                                ));
+                            }
+                            // Navigator.of(context).pushReplacement(PageTransition(
+                            //   type: PageTransitionType.bottomToTop,
+                            //   child: explorePage(),
+                            // ));
+                          });
+                          // if (dependencyInjection.get<AuthProvider>().additionalUserInfo == null) {
+                          // // signed in
+                          //   context.read<AuthProvider>().getLoggedInUser();
+                          //   Navigator.of(context).pushReplacement(PageTransition(
+                          //     type: PageTransitionType.bottomToTop,
+                          //     child: explorePage(),
+                          //   ));
+                          // } else {
+                          //   Navigator.of(context).pushReplacement(PageTransition(
+                          //     type: PageTransitionType.bottomToTop,
+                          //     child: OnBoardingPage(),
+                          //   ));
+                          // }
 
                         },
                         decoration: BoxDecoration(
