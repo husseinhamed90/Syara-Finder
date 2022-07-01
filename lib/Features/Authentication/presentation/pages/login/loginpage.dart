@@ -121,17 +121,17 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: ElevatedButton(
                 onPressed: () async{
-                  dependencyInjection.get<HomeProvider>().returnNavBarToHome();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => explorePage()),
-                  );
-                  // await authProviderInstance!.signInWithNormalAccount(email: email.text, password: password.text).then((value) {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => explorePage()),
-                  //   );
-                  // });
+                  // dependencyInjection.get<HomeProvider>().returnNavBarToHome();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => explorePage()),
+                  // );
+                  await dependencyInjection.get<AuthProvider>().signInWithNormalAccount(email: email.text, password: password.text).then((value) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => explorePage()),
+                    );
+                  });
                 },
                 child: Text(
                   "Login",

@@ -1,5 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:syara_finder/injection_container.dart';
 
@@ -41,15 +43,25 @@ class profile extends StatelessWidget {
                     children:  <Widget>[
                       const SizedBox(height: 10.0),
                       ListTile(
-                        // ignore: prefer_const_constructors
-                        title: Text("Full Name"),
-                        subtitle: Text((dependencyInjection.get<AuthProvider>().userCredential!=null)?(dependencyInjection.get<AuthProvider>().profile==null)?"":dependencyInjection.get<AuthProvider>().profile!["email"]:dependencyInjection.get<AuthProvider>().profile!["name"]),
 
-                        trailing: Icon(Icons.edit),
+                        title: const Text("Full Name"),
+                        subtitle: Text((dependencyInjection.get<AuthProvider>().userEntity!=null)
+                            ?("${dependencyInjection.get<AuthProvider>().userEntity!.username}")
+                            :("${dependencyInjection.get<AuthProvider>().additionalUserInfo!.profile!["name"]}")),
+                        trailing: const Icon(Icons.edit),
                       ),
                       ListTile(
                         title: const Text("Email"),
-                        subtitle: Text((dependencyInjection.get<AuthProvider>().userCredential!=null)?(dependencyInjection.get<AuthProvider>().profile==null)?dependencyInjection.get<AuthProvider>().userCredential!.email!:dependencyInjection.get<AuthProvider>().profile!["email"]:dependencyInjection.get<AuthProvider>().profile!["email"]),
+                        subtitle: Row(
+                          children: [
+                            buildCachedNetworkImage(),
+                            const SizedBox(width: 5.0),
+                            Text(
+                                (dependencyInjection.get<AuthProvider>().userEntity!=null)
+                                    ?dependencyInjection.get<AuthProvider>().userEntity!.email
+                                    :dependencyInjection.get<AuthProvider>().additionalUserInfo!.profile!["email"]),
+                          ],
+                        ),
                         trailing: const Icon(Icons.edit),
                       ),
                       // const ListTile(
@@ -110,5 +122,32 @@ class profile extends StatelessWidget {
             Icons.logout,
           ),
         ));
+  }
+
+  CachedNetworkImage buildCachedNetworkImage() {
+
+    if(dependencyInjection.get<AuthProvider>().additionalUserInfo!=null){
+      if(dependencyInjection.get<AuthProvider>().additionalUserInfo!.providerId=="google.com") {
+        return CachedNetworkImage(
+            imageUrl: "https://img.icons8.com/color/344/gmail-new.png",
+            height: 25.h);
+      }
+      else if(dependencyInjection.get<AuthProvider>().additionalUserInfo!.providerId=="facebook.com") {
+        return CachedNetworkImage(
+            imageUrl: "https://img.icons8.com/color/344/facebook.png",
+            height: 25.h);
+      }
+      else{
+        return CachedNetworkImage(
+            imageUrl: "https://img.icons8.com/ios-glyphs/344/new-post.png",
+            height: 25.h);
+      }
+    }
+    else{
+      return CachedNetworkImage(
+          imageUrl: "https://img.icons8.com/ios-glyphs/344/new-post.png",
+          height: 25.h);
+    }
+
   }
 }

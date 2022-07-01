@@ -39,7 +39,7 @@ class explorePage extends StatelessWidget {
           onTap: (value) {
             if(value==2){
 
-              if(dependencyInjection.get<AuthProvider>().userCredential==null){
+              if(dependencyInjection.get<AuthProvider>().userEntity==null){
                 if(showDialogWhenProfilePageTapped(context)){
                   context.read<HomeProvider>().onPageSelected(value,context);
                 }
@@ -58,7 +58,7 @@ class explorePage extends StatelessWidget {
   }
 }
 bool showDialogWhenProfilePageTapped(BuildContext context){
-  if (dependencyInjection.get<AuthProvider>().userCredential == null&&dependencyInjection.get<AuthProvider>().additionalUserInfo==null
+  if (dependencyInjection.get<AuthProvider>().userEntity == null&&dependencyInjection.get<AuthProvider>().additionalUserInfo==null
       &&dependencyInjection.get<AuthProvider>().profile==null) {
     showDialogWithMessage(context: context,message: "You Should Be Logged In First To Show Your Profile");
     return false;

@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:syara_finder/Features/Authentication/presentation/pages/login/loginpage.dart';
 import 'package:syara_finder/Features/Authentication/presentation/pages/signup/signup.dart';
@@ -20,7 +21,8 @@ class _signningState extends State {
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
-        height: 60,
+
+        height: 60.h,
         animationDuration: const Duration(milliseconds: 1500),
         backgroundColor: Colors.transparent,
         key: _navKey,

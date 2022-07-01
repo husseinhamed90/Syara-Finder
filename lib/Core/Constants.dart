@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 String BASE_URL ="https://syarafinder.com/api";
 
+String BASE_URL_FOR_AUTH ="https://husseinhamed1.pythonanywhere.com/CarsStoreApp";
 Color mPrimaryColor = Colors.white;
 
 Color mCardColor = Color.fromARGB(255, 250, 198, 149);

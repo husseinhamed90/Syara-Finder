@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:syara_finder/Features/Authentication/presentation/manager/AuthProvider.dart';
+import 'package:syara_finder/injection_container.dart';
 
+import '../../../../Home/presentation/pages/HomePage/explorePage.dart';
 import '../SharedComponantes.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -134,12 +137,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         //   context,
                         //   MaterialPageRoute(builder: (context) => explorePage()),
                         // );
-                      // authProviderInstance!.createNormalAccount(email: email.text, password: password.text).then((value) {
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => explorePage()),
-                      //   );
-                      // });
+                      dependencyInjection.get<AuthProvider>().createNormalAccount(email: email.text, password: password.text, username: fullname.text).then((value) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => explorePage()),
+                        );
+                      });
                     },
                     // ignore: sort_child_properties_last
                     child: const Text(
