@@ -73,7 +73,7 @@ class _buildFavouritesListState extends State<buildFavouritesList> {
                                       ),
                                       const Spacer(),
                                       buildButton(textSize: 10,onTap: (){
-                                        openLinkOfCurrentCar(context.watch<HomeProvider>().favourites[index].originUrl!);
+                                        openLinkOfCurrentCar(context.read<HomeProvider>().favourites[index].originUrl!);
                                       }, buttonText: 'Go to website',height: 38.h,width:98.w ),
                                     ],
                                   ),
@@ -91,6 +91,4 @@ class _buildFavouritesListState extends State<buildFavouritesList> {
       ),
     );
   }
-
-
 }

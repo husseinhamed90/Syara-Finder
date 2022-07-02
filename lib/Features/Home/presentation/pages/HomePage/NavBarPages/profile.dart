@@ -13,7 +13,6 @@ class profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print(dependencyInjection.get<AuthProvider>().userEntity!.toJson());
     return Scaffold(
         appBar: buildAppBar(context, "Profile"),
         backgroundColor: HexColor("#F9FBFC"),

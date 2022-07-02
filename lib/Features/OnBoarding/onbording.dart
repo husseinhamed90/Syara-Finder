@@ -22,33 +22,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   Timer ?_timer;
   int seconds = 0;
   late StreamController<int> _events;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
 
-  }
-  void _startTimer(BuildContext context) {
-    _events = StreamController<int>();
-    _events.add(4);
-    seconds = 4;
-    if (_timer != null) {
-      _timer!.cancel();
-    }
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if(seconds > 0){
-        seconds--;
-      }
-      else{
-        _timer!.cancel();
-        _events.close();
-        goToHome(context);
-      }
-      if(!_events.isClosed){
-        _events.add(seconds);
-      }
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -111,7 +86,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   ),
                   actions: [
                     TextButton(onPressed: (){
-                      //isCancel=true;
                       context.read<HomeProvider>().changeIsCancelState(true);
                       _timer!.cancel();
                       _events.close();
@@ -131,7 +105,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     ),))
                   ],
                 );});
-          //goToHome(context);
         },
         next: const Icon(
           Icons.arrow_forward,
@@ -144,11 +117,35 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       ),
     );
   }
+
+  void _startTimer(BuildContext context) {
+    _events = StreamController<int>();
+    _events.add(4);
+    seconds = 4;
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if(seconds > 0){
+        seconds--;
+      }
+      else{
+        _timer!.cancel();
+        _events.close();
+        goToHome(context);
+      }
+      if(!_events.isClosed){
+        _events.add(seconds);
+      }
+    });
+  }
+
   void goToHome(BuildContext cxt) {
     Navigator.pop(cxt);
     Navigator.push(cxt, PageTransition(type: PageTransitionType.leftToRight, child: explorePage(),duration: const Duration(seconds: 1)));
 
   }
+
   Widget buildImage(String path) => Center(child: Image.asset(path, width: 350));
 
   DotsDecorator getDotDecoration() => DotsDecorator(
