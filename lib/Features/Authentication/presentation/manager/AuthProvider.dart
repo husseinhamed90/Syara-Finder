@@ -9,8 +9,10 @@ import 'package:syara_finder/Features/Authentication/data/remote/data_sources/Fi
 import 'package:syara_finder/Features/Authentication/domain/entities/UserEntity.dart';
 import 'package:syara_finder/Features/Authentication/domain/repositories/AuthApiServiceRepository.dart';
 import 'package:syara_finder/Features/Authentication/domain/repositories/AuthRepository.dart';
+import 'package:syara_finder/Features/BrandsAndModelsAndCars/presentation/manager/BrandsAndModelsProvider.dart';
 import 'package:syara_finder/injection_container.dart';
 
+import '../../../Home/presentation/manager/HomeProvider.dart';
 import '../../data/models/UserModel.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -62,6 +64,7 @@ class AuthProvider with ChangeNotifier {
   Future logOutFromAccount()async{
     userEntity=null;
     await dependencyInjection.get<AuthRepository>().signOutFromAccount();
+    dependencyInjection.get<HomeProvider>().resetFavourites();
     await dependencyInjection.get<SharedPrefSource>().removeKey("UserProfile");
   }
   Future signInWithGoogleAccount(Function onEndFunction)async {
@@ -79,24 +82,10 @@ class AuthProvider with ChangeNotifier {
   UserEntity ?userEntity;
   Future signInWithNormalAccount({required String email , required String password})async{
     userEntity= await dependencyInjection.get<AuthApiServiceRepository>().login(email: email,password: password);
-
-   // profile=userEntity!.toJson();
     return userEntity;
-    // return await dependencyInjection.get<AuthRepository>().signInWithNormalAccount(email: email, password: password).then((value){
-    //   userCredential=value.user;
-    //   additionalUserInfo=value.additionalUserInfo;
-    //   profile=value.additionalUserInfo!.profile;
-    //   notifyListeners();
-    // });
   }
   Future createNormalAccount({required String email,required String password,required String username})async{
-    //  await dependencyInjection.get<AuthRepository>().createNormalAccount(email: email, password: password).then((value){
-    //    userCredential=value.user;
-    //    additionalUserInfo=value.additionalUserInfo;
-    //   notifyListeners();
-    // });
     userEntity= await dependencyInjection.get<AuthApiServiceRepository>().register(email: email,password: password, username: username,);
-  //  profile=userEntity!.toJson();
     return userEntity;
   }
 }

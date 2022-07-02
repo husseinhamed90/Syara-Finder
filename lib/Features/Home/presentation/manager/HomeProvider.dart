@@ -24,6 +24,10 @@ class HomeProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  void resetFavourites(){
+    favourites=[];
+    notifyListeners();
+  }
   void initTimer(Timer t){
     timer=t;
     notifyListeners();

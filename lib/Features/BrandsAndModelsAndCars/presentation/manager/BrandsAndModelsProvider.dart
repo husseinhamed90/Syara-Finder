@@ -27,6 +27,7 @@ class BrandsAndModelsCarsProvider extends ChangeNotifier{
     filteredCars.value =cars!.where((element) => element.model!.brand!.brandName==brandName).toList();
     return filteredCars.value;
   }
+
   List<int> years = [2000, 2001, 2002, 2005, 2010, 2020, 2022];
   var listOfModels = <PopupMenuItem<Model>>[];
   var listOfYears = <PopupMenuItem<int>>[];
